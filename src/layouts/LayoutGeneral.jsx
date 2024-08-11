@@ -5,13 +5,13 @@ import { UserContext } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Aside from '../components/Aside';
+import { Tooltip } from 'react-tooltip';
 function LayoutGeneral() {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
-        if(!user) {
-            navigate("/");
-        }else{
+        if(user){
+            console.log("Hay usuario", user);
             if(user.privilege === 1){
                 navigate("alumno");
             }
@@ -21,15 +21,24 @@ function LayoutGeneral() {
             if(user.privilege === 3){
                 navigate("director");
             }
+        }else{
+            navigate("/");
         }
     }, [user]);
     return (
         <>
-            <Navigation />
-            <Aside />
-            <main>
-                <Outlet />
-            </main>
+        {
+            user && (
+                <>
+                    <Navigation />
+                    <Aside />
+                    <main>
+                        <Outlet />
+                    </main> 
+                    <Tooltip id="tooltip"/>
+                </>
+            )
+        }
         </>
     );
 }

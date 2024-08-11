@@ -18,7 +18,7 @@ function Aside() {
     <aside>
         <div className="anti-shadow-div">
             <h2>
-                <Link to="home">
+                <Link to={"/home/" + user.privilege === 1 ? "alumno" : user.privilege === 2 ? "profesor" : "director"}>
                     <img src="/img/home.webp" alt="Icono hogar" />
                 {
                     user.privilege <= 2 ? "Asignaturas" : "Opciones"
@@ -43,7 +43,6 @@ function Aside() {
                                 link = partes[1].toLowerCase();
                             }
                             if(partes.length == 1){
-                                console.log(partes);
                                 link = partes[0].toLowerCase();
                             }
                             

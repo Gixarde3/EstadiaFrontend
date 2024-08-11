@@ -15,6 +15,7 @@ body, #root{
     --amarillo: #faa21b;
     --morado: #592c80;
     --azul-opacio: #415369;
+    --verde: #4cab52;
     position: relative;
 
 }
@@ -27,6 +28,7 @@ form{
 }
 main{
     margin-top: 100px;
+    margin-left: 350px;
     width: 100dvw;
     min-height: calc(100dvh - 110px);
     display: flex;
@@ -34,6 +36,15 @@ main{
     justify-content: center;
     align-items: center;
     justify-self: center;
+
+    & h1{
+        border-radius: 15px;
+        background-color: var(--rojo);
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 2rem;
+        font-weight: bold;
+    }
 }
 header{
     position: fixed;
@@ -106,7 +117,10 @@ aside{
     justify-content: flex-start;
     align-items: center;
     height: calc(100dvh - 100px);
+    width: 350px;
+    position: fixed;
     margin-top:100px;
+    background: #fff;
     border-right: 1px solid #e2e2e2;
     & h2 {
         width: 100%;
@@ -222,6 +236,11 @@ label{
     cursor: pointer;
     transition: all 0.3s;
 }
+
+.button.cancel{
+    background-color: var(--rojo);
+}
+
 .button:hover{
     scale: 1.01;
 }
