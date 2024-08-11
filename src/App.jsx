@@ -15,6 +15,10 @@ import "./assets/css/general.css"
 import GestionUsuarios from "./pages/GestionUsuarios";
 import SolicitarToken from "./pages/SolicitarToken";
 import CambiarContrasenia from "./pages/CambiarContrasenia";
+import Editar from "./pages/Editar";
+import Nuevo from "./pages/Nuevo";
+import GestionCarreras from "./pages/GestionCarreras";
+import GestionDirectores from "./pages/GestionDirectores";
 function App() {
   return (
     <UserContextProvider>
@@ -25,10 +29,14 @@ function App() {
             <Route path="/solicitar_token" element={<SolicitarToken/>}/>
             <Route path="/cambiar-contrasena/:token" element={<CambiarContrasenia/>}/>
             <Route path="/home" element={<LayoutGeneral />}>
+              <Route path=":modelo/editar/:id" element={<Editar/>}/>
+              <Route path=":modelo/nuevo" element={<Nuevo/>}/>
               <Route path="alumno" element={<h1>Alumno</h1>} />
               <Route path="profesor" element={<h1>Profesor</h1>} />
               <Route path="director" element={<PrincipalDirector/>}/>
               <Route path="usuarios" element={<GestionUsuarios/>}/>
+              <Route path="carreras" element={<GestionCarreras/>}/>
+              <Route path="directores" element={<GestionDirectores/>}/>
             </Route>
         </Routes>
         </BrowserRouter>

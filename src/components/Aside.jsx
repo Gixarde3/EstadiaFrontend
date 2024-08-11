@@ -5,6 +5,8 @@ function Aside() {
     const { user } = useContext(UserContext);
     const opciones = [
         "Gestión de usuarios",
+        "Gestión de directores",
+        "Gestión de carreras",
         "Gestión de planes educativos",
         "Gestión de atributos de egreso",
         "Gestión de criterios de desempeño",

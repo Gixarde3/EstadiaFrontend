@@ -16,6 +16,7 @@ body, #root{
     --morado: #592c80;
     --azul-opacio: #415369;
     --verde: #4cab52;
+    --azul: #0083ff;
     position: relative;
 
 }
@@ -27,7 +28,7 @@ form{
     width: 100%;
 }
 main{
-    margin-top: 100px;
+    margin-top: 110px;
     margin-left: 350px;
     width: 100dvw;
     min-height: calc(100dvh - 110px);
@@ -44,6 +45,15 @@ main{
         padding: 10px 20px;
         font-size: 2rem;
         font-weight: bold;
+    }
+
+    & section{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
     }
 }
 header{
@@ -247,4 +257,133 @@ label{
 
 .button:active{
     scale: 0.99;
+}
+
+search#search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    position: relative;
+    z-index: 2;
+    & input{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        height: 40px;
+        font-size: 1rem;
+        border-radius: 0;
+    }
+    & button{
+        height: 40px;
+        width: 40px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        cursor: pointer;
+        border-left: none;
+        padding: 0.3rem;
+        &#filters{
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-right: none;
+            border-left: 1px solid #000;
+        }
+
+        &#search-button{
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            
+        }
+    }
+    #filtros{
+        position: absolute;
+        top: calc(-100% + 80px);
+        left: 0;
+        flex-direction: column;
+        width: max-content;
+        
+
+        & .filtro{
+            width: 100%;
+            border-radius: 0;
+            border: 1px solid #000;
+            background: #fff;
+        }
+
+        & .filtro:last-child{
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        & .filtro:hover{
+            background: #e2e2e2;
+        }
+    }
+}
+
+#resultados{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 80%;
+    max-height: 600px;
+    overflow-y: scroll;
+    z-index: 1;
+    & .resultado{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.3rem;
+        padding: 1rem;
+        border: 1px solid #000;
+        position: relative;
+        border-radius: 5px;
+        & h2{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        & p{
+            font-size: 1rem;
+        }
+        & .operation-buttons{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.1rem;
+            top: 5px;
+            right: 5px;
+    
+            & button{
+                height: 40px;
+                width: 40px;
+                border-radius: 5px;
+                cursor: pointer;
+                padding: 0.3rem;
+                & img{
+                    width: 100%;
+                    height: auto;
+                    border: none;
+                    border-radius: 0;
+                    filter: invert(1);
+                }
+    
+                &.editar{
+                    background: var(--azul);
+                }
+    
+                &.eliminar{
+                    background: var(--rojo);
+                }
+            }
+        }
+    }
+
 }

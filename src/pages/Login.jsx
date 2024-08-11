@@ -30,10 +30,12 @@ function Login() {
     const login = async (e) => {
         e.preventDefault();
         try {
+            axios.defaults.withCredentials = true;
             const response = await axios.post(`${config.endpoint}/login`, {
                 clave_identificacion: identificacion,
                 password
             });
+            console.log(response);
             setUser(response.data);
         } catch (error) {
             console.error(error);
