@@ -1,0 +1,231 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body, #root{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Montserrat', sans-serif;
+    --rojo: #ef3741;
+    --amarillo: #faa21b;
+    --morado: #592c80;
+    --azul-opacio: #415369;
+    position: relative;
+
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+main{
+    margin-top: 100px;
+    width: 100dvw;
+    min-height: calc(100dvh - 110px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+}
+header{
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100px;
+    top: 0;
+    left: 0;;
+    width: 100%;
+    z-index: 10;
+    padding-inline: 1rem;
+    gap: 1rem;
+    background: var(--amarillo);
+    & *{
+        height: 100%;
+    }
+    & #title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 90%;
+        max-width: max-content;
+        background: var(--azul-opacio);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom-right-radius: 25px;
+        & h1{
+            font-size: 2rem;
+            color: #fff;
+            margin: 0;
+            vertical-align: middle;
+            height: min-content;
+        }
+        & .logo{
+            height: auto;
+            max-height: 80%;
+            width: auto;
+        }
+    }
+    & nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & a{
+            text-decoration: none;
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+    }
+    & p{
+        height: min-content;
+        font-weight: bold;
+    }
+    & .logo{
+        height: auto;
+        max-height: 80%;
+        width: auto;
+    }
+}
+
+aside{
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: calc(100dvh - 100px);
+    margin-top:100px;
+    border-right: 1px solid #e2e2e2;
+    & h2 {
+        width: 100%;
+    }
+    & h2 a{
+        padding-inline: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-right:0px; /* Set to 0 if you don't want shadow at the right side */
+        margin-left:0px; /* Set to 20px if you want shadow at the left side */
+        margin-top:0px; /* Set to 20px if you want shadow at the top side */
+        margin-bottom:10px; /* Set to 20px if you want shadow at the bottom side */
+        box-shadow: 0px 0px 10px black; 
+        border-bottom: 2px solid #be76ac;
+        & img{
+            height: 50px;
+            width: auto;
+        }
+    }
+
+    & #nav-options{
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        gap: 1rem;
+
+        & a{
+            text-decoration: none;
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 10px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            &:hover{
+                background: #e2e2e2;
+            }
+        }
+    }
+}
+
+.anti-shadow-div{
+    display:table;
+    overflow:hidden;
+    min-width: max-content;
+    width: 100%;
+}
+
+label{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+    width: 100%;
+    & .input-row{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        & input{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            height: 40px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            font-size: 1rem;
+        }
+        & .icon{
+            height: 40px;
+            width: auto;
+            border-radius: 5px;
+            border: 1px solid #000;
+            border-right: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        & button {
+            height: 40px;
+            width: 40px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            cursor: pointer;
+            border-left: none;
+
+            & .icon{
+                width: 100%;
+                height: auto;
+                border: none;
+                border-radius: 0;
+            }
+        }
+    }
+}
+
+.button{
+    background-color: var(--morado);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    /*Espaciado entre letras*/
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.button:hover{
+    scale: 1.01;
+}
+
+.button:active{
+    scale: 0.99;
+}
