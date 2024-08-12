@@ -26,7 +26,7 @@ function BarraBusqueda(props) {
             showAlert("Buscando", "Buscando resultados", "loading");
             const formData = new FormData();
             formData.append(filtro, busqueda);
-            const response = await axios.post(`${config.endpoint}/${modeloBuscar}s/findAll`, formData, {
+            const response = await axios.post(`${config.endpoint}/${modeloBuscar.toLowerCase()}s/findAll`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

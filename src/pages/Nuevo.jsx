@@ -21,6 +21,10 @@ function Nuevo() {
         setValores({...valores});
     }
 
+    function separarMayusculas(palabra) {
+        return palabra.replace(/([A-Z])/g, ' $1').trim();
+    }
+
     useEffect(() => {
         console.log(objeto);
         objeto.map(val => {
@@ -59,16 +63,19 @@ function Nuevo() {
     return (
         <>
             <section id="principal">
-                <h1>Crear {modelo}</h1>
+                <h1>Crear {separarMayusculas(modelo)}</h1>
                 <form onSubmit={crear} className="login">
                     {
                         Object.keys(valores).map((key, index) => {
                             return (
                                 <label key={index}>
-                                    {key.replace("_", " ").split(' ')
-                                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                        .join(' ')
+                                    {
+                                        key === 'anio' ?  "Año" : 
+                                                                    key.replace("_", " ").split(' ')
+                                                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                                                    .join(' ')
                                     }
+                                    
                                     <div className="input-row">    
                                         <input type="text" value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
                                     </div>
@@ -76,7 +83,7 @@ function Nuevo() {
                             );
                         })
                     }
-                    <button className="button">Crear {modelo}</button>
+                    <button className="button">Crear {separarMayusculas(modelo)}</button>
                 </form>
             </section>
             <Alert 

@@ -19,6 +19,7 @@ import Editar from "./pages/Editar";
 import Nuevo from "./pages/Nuevo";
 import GestionCarreras from "./pages/GestionCarreras";
 import GestionDirectores from "./pages/GestionDirectores";
+import GestionPlanesEducativos from "./pages/GestionPlanesEducativos";
 function App() {
   return (
     <UserContextProvider>
@@ -37,6 +38,7 @@ function App() {
               <Route path="usuarios" element={<GestionUsuarios/>}/>
               <Route path="carreras" element={<GestionCarreras/>}/>
               <Route path="directores" element={<GestionDirectores/>}/>
+              <Route path="planes-educativos" element={<GestionPlanesEducativos/>}/>
             </Route>
         </Routes>
         </BrowserRouter>

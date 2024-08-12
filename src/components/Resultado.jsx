@@ -17,7 +17,7 @@ function Resultado(props) {
     }
     const eliminar = async (id) => {
         try{
-            const response = await axios.delete(`${config.endpoint}/${modelo}/${id}`);
+            const response = await axios.delete(`${config.endpoint}/${modelo.toLoweCase()}/${id}`);
             showAlert("Eliminado", "Elemento eliminado correctamente", "success");
             props.search();
         }catch(error){

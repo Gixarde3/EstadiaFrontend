@@ -13,6 +13,10 @@ function Editar() {
         setAlert({ title, message, kind, isOpen: true, redirectRoute, asking, onAccept });
     }
 
+    function separarMayusculas(palabra) {
+        return palabra.replace(/([A-Z])/g, ' $1').trim();
+    }
+
     useEffect(() => {
         const getValores = async () => {
             try {
@@ -47,7 +51,7 @@ function Editar() {
             Object.keys(valores).forEach(key => {
                 formData.append(key, valores[key]);
             });
-            const response = await axios.put(`${config.endpoint}/${modelo}/${id}`, formData, {
+            const response = await axios.put(`${config.endpoint}/${modelo.toLocaleLowerCase()}/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -69,7 +73,7 @@ function Editar() {
     return (
         <>
             <section id="principal">
-                <h1>Editar {modelo}</h1>
+                <h1>Editar {separarMayusculas(modelo)}</h1>
                 <form onSubmit={editar} className="login">
                     {
                         Object.keys(valores).map((key, index) => {
@@ -88,7 +92,7 @@ function Editar() {
                             );
                         })
                     }
-                    <button className="button">Editar {modelo}</button>
+                    <button className="button">Editar {separarMayusculas(modelo)}</button>
                 </form>
             </section>
             <Alert 
