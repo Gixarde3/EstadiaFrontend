@@ -7,6 +7,8 @@ function BarraBusqueda(props) {
     const filters = props.filters;
     const modeloBuscar = props.modeloBuscar;
     const campoTitulo = props.campoTitulo;
+    const onSelect = props.onSelect ?? null;
+    const seleccionable = props.seleccionable ?? false;
     const [mostrarFiltros, setMostrarFiltros] = useState(false);
     const [filtro, setFiltro] = useState("");
     const [busqueda, setBusqueda] = useState("");
@@ -18,8 +20,8 @@ function BarraBusqueda(props) {
     }
 
     const search = async () => {
-        if(busqueda === ""){
-            showAlert("Error", "Debes ingresar un término de búsqueda", "error");
+        if(filtro === ""){
+            showAlert("Error", "Selecciona un filtro primero", "error");
             return;
         }
         try{
@@ -62,7 +64,7 @@ function BarraBusqueda(props) {
                     {
                         filters.map((filter, index) => {
                             return (
-                                <button className="filtro" key={index} onClick={() => {setFiltro(filter.filter); setMostrarFiltros(false)}}>{filter.name}</button>
+                                <button className="filtro" type='button' key={index} onClick={() => {setFiltro(filter.filter); setMostrarFiltros(false)}}>{filter.name}</button>
                             );
                         })   
                     }
@@ -72,7 +74,7 @@ function BarraBusqueda(props) {
                 {
                     resultados.map((resultado, index) => {
                         return (
-                            <Resultado key={index} titulo={resultado[campoTitulo]} datosVer={{...resultado}} campoTitulo={campoTitulo} modelo={modeloBuscar} search={search}/>
+                            <Resultado key={index} titulo={resultado[campoTitulo]} datosVer={{...resultado}} campoTitulo={campoTitulo} modelo={modeloBuscar} search={search} seleccionable={seleccionable} onSelect={onSelect}/>
                         );
                     })
                 }

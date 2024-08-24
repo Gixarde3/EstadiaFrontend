@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function Resultado(props) {
     const modelo = props.modelo;
+    const seleccionable = props.seleccionable;
+    const onSelect = props.onSelect;
     const navigate = useNavigate();
     const [alert, setAlert] = useState(null);
     const closeAlert = () => setAlert(null);
@@ -53,6 +55,17 @@ function Resultado(props) {
                 >
                     <img src="/img/edit.png" alt="Botón de editar" />
                 </button>
+                {
+                    seleccionable &&
+                    <button className="opcion seleccionar"
+                        data-tooltip-id='tooltip'
+                        data-tooltip-content='Seleccionar este elemento'
+                        data-tooltip-place='top'
+                        onClick={() => onSelect(props.datosVer[`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`])}
+                    >
+                        <img src="/img/select.png" alt="Botón de seleccionar" />
+                    </button>
+                }
             </div>
             <h2>{props.titulo}</h2>
             {
