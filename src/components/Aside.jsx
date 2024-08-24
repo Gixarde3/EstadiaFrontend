@@ -2,7 +2,7 @@ import { UserContext } from "../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 function Aside() {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const opciones = [
         "Gestión de usuarios",
         "Gestión de directores",
@@ -33,23 +33,28 @@ function Aside() {
                 user.privilege <= 2 ?
                     <p>Pronto disponible</p> :
                     (
-                        opciones.map((opcion, index) => {
-                            let link = "";
-                            let partes = opcion.split(" ");
-                            let linkPartes = [];
-                            for(let i = 2; i < partes.length; i++){
-                                linkPartes.push(partes[i]);
-                            }
-                            link = linkPartes.join('-').toLowerCase();
-                            if(partes.length == 2){
-                                link = partes[1].toLowerCase();
-                            }
-                            if(partes.length == 1){
-                                link = partes[0].toLowerCase();
-                            }
-                            
-                            return <Link to={link} key={index}>{opcion}</Link>
-                        })
+                        <>
+                        {
+                            opciones.map((opcion, index) => {
+                                let link = "";
+                                let partes = opcion.split(" ");
+                                let linkPartes = [];
+                                for(let i = 2; i < partes.length; i++){
+                                    linkPartes.push(partes[i]);
+                                }
+                                link = linkPartes.join('-').toLowerCase();
+                                if(partes.length == 2){
+                                    link = partes[1].toLowerCase();
+                                }
+                                if(partes.length == 1){
+                                    link = partes[0].toLowerCase();
+                                }
+                                
+                                return <Link to={link} key={index}>{opcion}</Link>
+                            })
+                        }
+                        <button onClick={() => setUser(null)}>Cerrar sesión</button>
+                        </>
                     )
             }
         </section>
