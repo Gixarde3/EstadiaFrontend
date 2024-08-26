@@ -82,15 +82,23 @@ function Editar() {
                             if(key === `id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`) return null;
                             return (
                                 <label key={index}>
-                                    {key.replace("_", " ").replace("id", "").split(' ')
-                                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                        .join(' ')
+                                    {
+                                        key.substring(0, 2) === "id" ? key.slice(2)
+                                    
+                                        : (
+                                            key.replace("_", " ").split(' ')
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join(' ')
+                                        )
                                     }
                                     {
                                          key.substring(0, 2) === "id" ? 
                                             <BarraBusquedaSeleccionar modelo={key.slice(2)} onSelect={(id) => cambiarValor(key, id)} defaultId={valores[key]}/>
                                          : (<div className="input-row">    
-                                            <input type="text" value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
+                                            <input type={
+                                                key.toLowerCase().includes("email") ? "email" :
+                                                typeof valores[key]
+                                            } value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
                                         </div>
                                         )
                                     }

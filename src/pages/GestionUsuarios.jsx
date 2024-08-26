@@ -8,7 +8,40 @@ function GestionUsuarios() {
             <section id="principal">
                 <h1>Gestión de Usuarios</h1>
                 <BarraBusquedaUsuarios />
-                <button id="agregar" onClick={() => navigate("/home/usuario/nuevo", {state: ['nombre', 'apellido_paterno', 'apellido_materno', 'email_personal', 'clave_identificacion', 'password', 'privilege']})} className="button">Crear nuevo usuario</button>
+                <button id="agregar" onClick={() => navigate("/home/usuario/nuevo", {
+                                                                                        state: [
+                                                                                                {
+                                                                                                    clave: 'nombre',
+                                                                                                    tipo: "text"
+                                                                                                }, 
+                                                                                                {
+                                                                                                    clave: 'apellido_paterno',
+                                                                                                    tipo: "text"
+                                                                                                }, 
+                                                                                                {
+                                                                                                    clave: 'apellido_materno',
+                                                                                                    tipo: "text"
+                                                                                                }, 
+                                                                                                {
+                                                                                                    clave: 'email_personal',
+                                                                                                    tipo: "email"
+                                                                                                },
+                                                                                                {
+                                                                                                    clave: 'clave_identificacion',
+                                                                                                    tipo: "text"
+                                                                                                }, 
+                                                                                                {
+                                                                                                    clave: 'password',
+                                                                                                    tipo: "password"
+                                                                                                },
+                                                                                                {
+                                                                                                    clave: 'privilege',
+                                                                                                    tipo: "number"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    )
+                                                                                } className="button">Crear nuevo usuario</button>
             </section>
         </>
     );

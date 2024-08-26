@@ -9,7 +9,32 @@ function GestionPlanesEducativos() {
             <section id="principal">
                 <h1>Gestión de planes educativos</h1>
                 <BarraBusquedaPlanesEducativos />
-                <button id="agregar" onClick={() => navigate("/home/PlanEducativo/nuevo", {state: ['idCarrera', 'nombre', 'abreviatura', 'clave', 'anio']})} className="button">Crear nuevo plan educativo</button>
+                <button id="agregar" onClick={() => navigate("/home/PlanEducativo/nuevo", {
+                                                                                            state: 
+                                                                                                [
+                                                                                                    {
+                                                                                                        clave: 'idCarrera',
+                                                                                                        tipo: "number"
+                                                                                                    }, 
+                                                                                                    {
+                                                                                                        clave: 'nombre',
+                                                                                                        tipo: "text"
+                                                                                                    }, 
+                                                                                                    {
+                                                                                                        clave: 'abreviatura',
+                                                                                                        tipo: "text"
+                                                                                                    }, 
+                                                                                                    {
+                                                                                                        clave: 'clave',
+                                                                                                        tipo: "text"
+                                                                                                    }, 
+                                                                                                    {
+                                                                                                        clave: 'anio',
+                                                                                                        tipo: "number"
+                                                                                                    }
+                                                                                                ]
+                                                                                            })} 
+                    className="button">Crear nuevo plan educativo</button>
             </section>
         </>
     );

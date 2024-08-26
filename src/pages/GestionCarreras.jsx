@@ -8,7 +8,21 @@ function GestionCarreras() {
             <section id="principal">
                 <h1>Gestión de Carreras</h1>
                 <BarraBusquedaCarreras />
-                <button id="agregar" onClick={() => navigate("/home/carrera/nuevo", {state: ['idDirector', 'nombre', 'abreviatura']})} className="button">Crear nueva carrera</button>
+                <button id="agregar" onClick={() => navigate("/home/carrera/nuevo", {
+                    state: [
+                        {
+                            clave: 'idDirector',
+                            tipo: "number"
+                        }, 
+                        {
+                            clave: 'nombre',
+                            tipo: "text"
+                        }, 
+                        {
+                            clave: 'abreviatura',
+                            tipo: "text"
+                        }
+                    ]})} className="button">Crear nueva carrera</button>
             </section>
         </>
     );
