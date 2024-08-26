@@ -171,7 +171,7 @@ aside{
         overflow-y: scroll;
         gap: 1rem;
 
-        & a{
+        & a, button{
             text-decoration: none;
             color: #000;
             font-size: 1.5rem;
@@ -179,6 +179,7 @@ aside{
             margin: 0 10px;
             padding: 10px;
             border-radius: 5px;
+            text-align: left;
             transition: all 0.3s;
             &:hover{
                 background: #e2e2e2;
@@ -273,7 +274,6 @@ search#search{
     align-items: center;
     width: 100%;
     position: relative;
-    z-index: 2;
     & input{
         width: 100%;
         padding: 10px;
@@ -311,8 +311,8 @@ search#search{
         left: 0;
         flex-direction: column;
         width: max-content;
-        
-
+        z-index: 2;
+        background-color: white;
         & .filtro{
             width: 100%;
             border-radius: 0;
@@ -416,4 +416,50 @@ search#search{
         font-size: 1.5rem;
         font-weight: bold;
     }
+}
+
+@media (max-width: 768px){
+    body, #root{
+        justify-content: center;
+    }
+    aside{
+        background-color: white;
+        z-index: 20;
+        transform: translateX(-200%);
+        transition: transform 0.3s ease-in-out;
+        width: 100%;
+        &.active{
+            transform: translateX(0);
+        }
+    }
+    main{
+        margin-left: 0;
+        width: 90dvw;
+        max-width: 90dvw;
+        position: relative;
+        &#layout{
+            width: 90dvw;
+            max-width: 90dvw;
+            left: auto;
+            & section{
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+    header{
+        & #title{
+            & h1{
+                display: none;
+            }
+        }
+
+        & p{
+            & #matricula{
+                display: none;
+            }
+        }
+    }
+    
+    
 }

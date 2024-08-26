@@ -9,6 +9,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    & h1{
+        background-color: white;
+        padding: 0;
+    }
 }
 .alert h3{
     color:black;

@@ -1,8 +1,10 @@
 import { UserContext } from "../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { OptionsContext } from "../contexts/OptionsContext";
 function Aside() {
     const { user, setUser } = useContext(UserContext);
+    const { isOpen, setIsOpen } = useContext(OptionsContext);
     const opciones = [
         "Gestión de usuarios",
         "Gestión de directores",
@@ -17,7 +19,7 @@ function Aside() {
         "Reportes",
     ]
     return (
-    <aside>
+    <aside className={isOpen && "active"}>
         <div className="anti-shadow-div">
             <h2>
                 <Link to={"/home/" + user.privilege === 1 ? "alumno" : user.privilege === 2 ? "profesor" : "director"}>
@@ -50,7 +52,7 @@ function Aside() {
                                     link = partes[0].toLowerCase();
                                 }
                                 
-                                return <Link to={link} key={index}>{opcion}</Link>
+                                return <Link to={link} key={index} onClick={() => setIsOpen(!isOpen)}>{opcion}</Link>
                             })
                         }
                         <button onClick={() => setUser(null)}>Cerrar sesión</button>

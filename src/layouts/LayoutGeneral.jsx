@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Aside from '../components/Aside';
 import { Tooltip } from 'react-tooltip';
+import { OptionsContextProvider } from '../contexts/OptionsContext';
 function LayoutGeneral() {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
@@ -29,14 +30,14 @@ function LayoutGeneral() {
         <>
         {
             user && (
-                <>
+                <OptionsContextProvider>
                     <Navigation />
                     <Aside />
                     <main id="layout">
                         <Outlet />
                     </main> 
                     <Tooltip id="tooltip"/>
-                </>
+                </OptionsContextProvider>
             )
         }
         </>
