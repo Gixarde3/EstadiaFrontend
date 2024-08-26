@@ -4,10 +4,10 @@ import Alert from "../components/Alert";
 import "../assets/css/login.css";
 import { useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import BarraBusquedaSeleccionar from "../components/BarraBusquedaSeleccionar";
 function Nuevo() {
     const location = useLocation();
     const objeto = location.state || {};
-    console.log(objeto);
     const {modelo} = useParams();
     const [valores, setValores] = useState({});
     const [alert, setAlert] = useState(null);
@@ -68,17 +68,31 @@ function Nuevo() {
                     {
                         Object.keys(valores).map((key, index) => {
                             return (
+                                key.substring(0,2) === "id" ? 
+                                <> 
+                                    <label key={index} style={{marginBottom: 0}}>
+                                        {
+                                            key === 'anio' ?  "Año" : 
+                                                                        key.replace("_", " ").replace("id", "").split(' ')
+                                                                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                                                        .join(' ')
+                                        }
+                                    </label>
+                                    <BarraBusquedaSeleccionar modelo={key.slice(2)} onSelect={(id) => cambiarValor(key, id)}/>
+                                </>
+                                :
                                 <label key={index}>
                                     {
                                         key === 'anio' ?  "Año" : 
-                                                                    key.replace("_", " ").split(' ')
+                                                                    key.replace("_", " ").replace("id", "").split(' ')
                                                                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                                                                     .join(' ')
                                     }
-                                    
-                                    <div className="input-row">    
-                                        <input type="text" value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
-                                    </div>
+                                    {
+                                        <div className="input-row">    
+                                            <input type="text" value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
+                                        </div>
+                                    }
                                 </label>
                             );
                         })

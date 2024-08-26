@@ -7,6 +7,7 @@ function Resultado(props) {
     const modelo = props.modelo;
     const seleccionable = props.seleccionable;
     const onSelect = props.onSelect;
+    const onSelectString = props.onSelectString;
     const navigate = useNavigate();
     const [alert, setAlert] = useState(null);
     const closeAlert = () => setAlert(null);
@@ -19,11 +20,12 @@ function Resultado(props) {
     }
     const eliminar = async (id) => {
         try{
-            const response = await axios.delete(`${config.endpoint}/${modelo.toLoweCase()}/${id}`);
+            const response = await axios.delete(`${config.endpoint}/${modelo}/${id}`);
             showAlert("Eliminado", "Elemento eliminado correctamente", "success");
             props.search();
         }catch(error){
             console.error(error);
+            console.log(modelo);
             if(error.response.status === 404){
                 showAlert("Error", "No se encontraron resultados", "error");
             }
@@ -35,33 +37,49 @@ function Resultado(props) {
             }
         }
     }
+    function separarMayusculas(palabra) {
+        return palabra.replace(/([A-Z])/g, ' $1').trim();
+    }
     return (
         <>
         <div className="resultado">
             <div className="operation-buttons">
-                <button className="opcion eliminar"
-                    data-tooltip-id='tooltip'
-                    data-tooltip-content='Eliminar'
-                    data-tooltip-place='top'
-                    onClick={() => {askEliminar(props.datosVer[`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`])}}
-                >
-                    <img src="/img/close.png" alt="Botón de eliminar" />
-                </button>
-                <button className="opcion editar"
-                    data-tooltip-id='tooltip'
-                    data-tooltip-content='Editar'
-                    data-tooltip-place='top'
-                    onClick={() => navigate(`/home/${modelo}/editar/${props.datosVer['id'+modelo.charAt(0).toUpperCase() + modelo.slice(1)]}`)}
-                >
-                    <img src="/img/edit.png" alt="Botón de editar" />
-                </button>
+                {
+                    !seleccionable &&
+                    (
+                        <>
+                            <button className="opcion eliminar"
+                                data-tooltip-id='tooltip'
+                                data-tooltip-content='Eliminar'
+                                data-tooltip-place='top'
+                                type="button"
+                                onClick={() => {askEliminar(props.datosVer[`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`])}}
+                            >
+                                <img src="/img/close.png" alt="Botón de eliminar" />
+                            </button>
+                            <button className="opcion editar"
+                                data-tooltip-id='tooltip'
+                                data-tooltip-content='Editar'
+                                data-tooltip-place='top'
+                                type="button"
+                                onClick={() => navigate(`/home/${modelo}/editar/${props.datosVer['id'+modelo.charAt(0).toUpperCase() + modelo.slice(1)]}`)}
+                            >
+                                <img src="/img/edit.png" alt="Botón de editar" />
+                            </button>
+                        </>
+                        )
+                    }
                 {
                     seleccionable &&
                     <button className="opcion seleccionar"
                         data-tooltip-id='tooltip'
                         data-tooltip-content='Seleccionar este elemento'
                         data-tooltip-place='top'
-                        onClick={() => onSelect(props.datosVer[`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`])}
+                        type="button"
+                        onClick={() => {
+                            onSelect(props.datosVer[`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`]);
+                            onSelectString(`${separarMayusculas(modelo)} actual: ${props.datosVer[props.campoTitulo]}`);
+                        } }
                     >
                         <img src="/img/select.png" alt="Botón de seleccionar" />
                     </button>

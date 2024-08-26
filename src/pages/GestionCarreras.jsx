@@ -1,27 +1,13 @@
-import BarraBusqueda from "../components/BarraBusqueda";
 import { useNavigate } from "react-router-dom";
+import BarraBusquedaCarreras from "../components/BarraBusquedaCarreras";
 function GestionCarreras() {
     const navigate = useNavigate();
-    const filtros = [
-        {
-            name: "Nombre",
-            filter: "nombre"
-        },
-        {
-            name: "Identificador del director",
-            filter: "idDirector"
-        },
-        {
-            name: "Abreviatura de la carrera",
-            filter: "abreviatura"
-        }
-    ]
     return (
         <>
             
             <section id="principal">
                 <h1>Gestión de Carreras</h1>
-                <BarraBusqueda filters={filtros} campoTitulo={"nombre"} modeloBuscar = "carrera"/>
+                <BarraBusquedaCarreras />
                 <button id="agregar" onClick={() => navigate("/home/carrera/nuevo", {state: ['idDirector', 'nombre', 'abreviatura']})} className="button">Crear nueva carrera</button>
             </section>
         </>

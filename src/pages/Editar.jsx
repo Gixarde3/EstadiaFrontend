@@ -4,6 +4,7 @@ import Alert from "../components/Alert";
 import "../assets/css/login.css";
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import BarraBusquedaSeleccionar from "../components/BarraBusquedaSeleccionar";
 function Editar() {
     const { modelo, id } = useParams();
     const [valores, setValores] = useState({});
@@ -81,13 +82,18 @@ function Editar() {
                             if(key === `id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`) return null;
                             return (
                                 <label key={index}>
-                                    {key.replace("_", " ").split(' ')
+                                    {key.replace("_", " ").replace("id", "").split(' ')
                                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                                         .join(' ')
                                     }
-                                    <div className="input-row">    
-                                        <input type="text" value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
-                                    </div>
+                                    {
+                                         key.substring(0, 2) === "id" ? 
+                                            <BarraBusquedaSeleccionar modelo={key.slice(2)} onSelect={(id) => cambiarValor(key, id)} defaultId={valores[key]}/>
+                                         : (<div className="input-row">    
+                                            <input type="text" value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
+                                        </div>
+                                        )
+                                    }
                                 </label>
                             );
                         })

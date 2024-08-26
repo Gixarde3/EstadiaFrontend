@@ -32,7 +32,7 @@ function LayoutGeneral() {
                 <>
                     <Navigation />
                     <Aside />
-                    <main>
+                    <main id="layout">
                         <Outlet />
                     </main> 
                     <Tooltip id="tooltip"/>

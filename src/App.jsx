@@ -20,7 +20,9 @@ import Nuevo from "./pages/Nuevo";
 import GestionCarreras from "./pages/GestionCarreras";
 import GestionDirectores from "./pages/GestionDirectores";
 import GestionPlanesEducativos from "./pages/GestionPlanesEducativos";
+import axios from "axios";
 function App() {
+  axios.defaults.withCredentials = true;
   return (
     <UserContextProvider>
       <BrowserRouter>

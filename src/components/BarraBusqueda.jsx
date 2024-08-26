@@ -9,6 +9,8 @@ function BarraBusqueda(props) {
     const campoTitulo = props.campoTitulo;
     const onSelect = props.onSelect ?? null;
     const seleccionable = props.seleccionable ?? false;
+    const defaultId = props.defaultId ?? null;
+    const onSelectString = props.onSelectString ?? null;
     const [mostrarFiltros, setMostrarFiltros] = useState(false);
     const [filtro, setFiltro] = useState("");
     const [busqueda, setBusqueda] = useState("");
@@ -50,13 +52,46 @@ function BarraBusqueda(props) {
         
     }
 
+    const getFilterName = (filter) => {
+        for(let i = 0; i < filters.length; i++){
+            if(filters[i].filter === filter){
+                return filters[i].name;
+            }
+        }
+    }
+
+    useEffect(() => {
+        if(defaultId){
+            const getDefault = async () => {
+                try {
+                    showAlert("Buscando", "Buscando resultados", "loading");
+                    const response = await axios.get(`${config.endpoint}/${modeloBuscar.toLowerCase()}/${defaultId}`);
+                    setResultados([response.data]);
+                    closeAlert();
+                }catch(error){
+                    console.error(error);
+                    if(error.response.status === 404){
+                        showAlert("Error", "No se encontraron resultados", "error");
+                    }
+                    else if(error.response.status === 401){
+                        showAlert("Error", "No tienes permiso para realizar esta acción", "error");
+                    }
+                    else if(error.response.status === 500){
+                        showAlert("Error", "Error en el servidor", "error");
+                    }
+                }
+            }
+            getDefault();
+        }
+    }, [defaultId]);
+
     return (
         <>
             <search id="search">
                 <button id="filters" type='button' onClick={() => setMostrarFiltros(!mostrarFiltros)}>
                     <img src="/img/filter.png" alt="Icono de filtros" />
                 </button>
-                <input type="text" id="search-input" placeholder="Buscar..." onChange={(e) => setBusqueda(e.target.value)}/>
+                <input type="text" id="search-input" placeholder={filtro ? `Buscar por ${getFilterName(filtro).toLowerCase()}` : `Selecciona un filtro para realizar la búsqueda`} onChange={(e) => setBusqueda(e.target.value)}/>
                 <button id="search-button" type='button' onClick={() => search()}>
                     <img src="/img/search.png" alt="Icono de búsqueda" />
                 </button>
@@ -74,7 +109,7 @@ function BarraBusqueda(props) {
                 {
                     resultados.map((resultado, index) => {
                         return (
-                            <Resultado key={index} titulo={resultado[campoTitulo]} datosVer={{...resultado}} campoTitulo={campoTitulo} modelo={modeloBuscar} search={search} seleccionable={seleccionable} onSelect={onSelect}/>
+                            <Resultado key={index} titulo={resultado[campoTitulo]} datosVer={{...resultado}} campoTitulo={campoTitulo} modelo={modeloBuscar} search={search} seleccionable={seleccionable} onSelect={onSelect} onSelectString = {onSelectString}/>
                         );
                     })
                 }

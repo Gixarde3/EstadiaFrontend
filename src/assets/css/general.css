@@ -18,6 +18,7 @@ body, #root{
     --verde: #4cab52;
     --azul: #0083ff;
     position: relative;
+    overflow-x: hidden;
 
 }
 form{
@@ -36,7 +37,6 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    justify-self: center;
 
     & h1{
         border-radius: 15px;
@@ -54,6 +54,14 @@ main{
         justify-content: flex-start;
         align-items: center;
         gap: 1rem;
+    }
+
+    &#layout {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: calc(100vw - 350px);
+        padding-bottom: 10px;
     }
 }
 header{
@@ -263,7 +271,7 @@ search#search{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 100%;
     position: relative;
     z-index: 2;
     & input{
@@ -310,6 +318,7 @@ search#search{
             border-radius: 0;
             border: 1px solid #000;
             background: #fff;
+            font-size: 1rem;
         }
 
         & .filtro:last-child{
@@ -329,7 +338,7 @@ search#search{
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    width: 80%;
+    width: 100%;
     max-height: 600px;
     overflow-y: scroll;
     z-index: 1;
@@ -382,8 +391,29 @@ search#search{
                 &.eliminar{
                     background: var(--rojo);
                 }
+
+                &.seleccionar{
+                    background: var(--verde);
+                }
             }
         }
     }
+}
 
+.item-seleccionado{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.3rem;
+    padding: 1rem;
+    border: 1px solid #000;
+    position: relative;
+    border-radius: 5px;
+    margin-top: 1rem;
+    & h2{
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 }
