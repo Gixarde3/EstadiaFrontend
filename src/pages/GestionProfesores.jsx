@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import BarraBusquedaDirectores from "../components/BarraBusquedaDirectores";
-function GestionDirectores() {
+import BarraBusquedaProfesores from "../components/BarraBusquedaProfesores";
+function GestionProfesores() {
     const navigate = useNavigate();
     return (
         <>
             
             <section id="principal">
-                <h1>Gestión de Directores</h1>
-                <BarraBusquedaDirectores />
-                <button id="agregar" onClick={() => navigate("/home/director/nuevo", {
+                <h1>Gestión de Profesores</h1>
+                <BarraBusquedaProfesores />
+                <button id="agregar" onClick={() => navigate("/home/profesor/nuevo", {
                                                                                         state: [
                                                                                             {
                                                                                                 clave: 'idUsuario',
@@ -27,17 +27,21 @@ function GestionDirectores() {
                                                                                                 tipo: "email"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'area_cargo',
+                                                                                                clave: 'tipo_contrato',
                                                                                                 tipo: "text"
+                                                                                            },
+                                                                                            {
+                                                                                                clave:"elemento_cargo",
+                                                                                                tipo:"text"
                                                                                             }
                                                                                         ]
                                                                                     }
                                                                                 )
                                                                             } 
-                    className="button">Crear nuevo director</button>
+                    className="button">Crear nuevo profesor</button>
             </section>
         </>
     );
 }
 
-export default GestionDirectores;
+export default GestionProfesores;

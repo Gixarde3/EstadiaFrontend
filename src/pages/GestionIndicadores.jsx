@@ -1,43 +1,43 @@
 import { useNavigate } from "react-router-dom";
-import BarraBusquedaDirectores from "../components/BarraBusquedaDirectores";
-function GestionDirectores() {
+import BarraBusquedaIndicadores from "../components/BarraBusquedaIndicadores";
+function GestionIndicadores() {
     const navigate = useNavigate();
     return (
         <>
             
             <section id="principal">
-                <h1>Gestión de Directores</h1>
-                <BarraBusquedaDirectores />
-                <button id="agregar" onClick={() => navigate("/home/director/nuevo", {
+                <h1>Gestión de Indicadores</h1>
+                <BarraBusquedaIndicadores />
+                <button id="agregar" onClick={() => navigate("/home/Indicador/nuevo", {
                                                                                         state: [
                                                                                             {
-                                                                                                clave: 'idUsuario',
+                                                                                                clave: 'idAsignatura',
                                                                                                 tipo: "number"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'area_especializacion',
+                                                                                                clave: 'identificador',
                                                                                                 tipo: "text"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'grado_escolar',
+                                                                                                clave: 'titulo',
                                                                                                 tipo: "text"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'email_profesional',
-                                                                                                tipo: "email"
+                                                                                                clave: 'descripcion',
+                                                                                                tipo: "text"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'area_cargo',
+                                                                                                clave: 'meta',
                                                                                                 tipo: "text"
-                                                                                            }
+                                                                                            }, 
                                                                                         ]
                                                                                     }
                                                                                 )
                                                                             } 
-                    className="button">Crear nuevo director</button>
+                    className="button">Crear nuevo indicador</button>
             </section>
         </>
     );
 }
 
-export default GestionDirectores;
+export default GestionIndicadores;

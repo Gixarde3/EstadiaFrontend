@@ -19,6 +19,9 @@ function Nuevo() {
 
     const cambiarValor = (key, value) => {
         valores[key] = value;
+        console.log(key);
+        console.log(value);
+        console.log(valores);
         setValores({...valores});
     }
 
@@ -59,6 +62,8 @@ function Nuevo() {
             }
             else if(error.response.status === 500){
                 showAlert("Error", "Error en el servidor", "error");
+            }else{
+                showAlert("Error", "Error desconocido", "error");
             }
         }
     }
@@ -70,11 +75,11 @@ function Nuevo() {
                     {
                         Object.keys(valores).map((key, index) => {
                             return (
-                                key.substring(0,2) === "id" ? 
+                                key.substring(0,2) === "id" && key.charAt(2) == key.charAt(2).toUpperCase() ? 
                                 <> 
                                     <label key={index} style={{marginBottom: 0}}>
                                         {
-                                            key.substring(0, 2) === "id" ? key.slice(2) : (
+                                            key.substring(0, 2) === "id" ? separarMayusculas(key.slice(2)) : (
                                             key === 'anio' ?  "Año" : 
                                                                         key.replace("_", " ").split(' ')
                                                                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))

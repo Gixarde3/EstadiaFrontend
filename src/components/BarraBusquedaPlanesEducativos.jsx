@@ -27,7 +27,7 @@ function BarraBusquedaPlanesEducativos(props) {
         },
     ]
     return (
-        <BarraBusqueda filters={filtros} campoTitulo={"abreviatura"} modeloBuscar = "PlanEducativo" seleccionable={seleccionable} onSelect={onSelect} defaultId={defaultId} onSelectstring = {onSelectString}/>
+        <BarraBusqueda filters={filtros} campoTitulo={"abreviatura"} modeloBuscar = "planEducativo" seleccionable={seleccionable} onSelect={onSelect} defaultId={defaultId} onSelectString = {onSelectString}/>
     );
 }
 

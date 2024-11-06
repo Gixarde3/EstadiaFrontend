@@ -1,43 +1,39 @@
 import { useNavigate } from "react-router-dom";
-import BarraBusquedaDirectores from "../components/BarraBusquedaDirectores";
-function GestionDirectores() {
+import BarraBusquedaAtributosEgreso from "../components/BarraBusquedaAtributosEgreso";
+function GestionAtributosEgreso() {
     const navigate = useNavigate();
     return (
         <>
             
             <section id="principal">
-                <h1>Gestión de Directores</h1>
-                <BarraBusquedaDirectores />
-                <button id="agregar" onClick={() => navigate("/home/director/nuevo", {
+                <h1>Gestión de Atributos de Egreso</h1>
+                <BarraBusquedaAtributosEgreso />
+                <button id="agregar" onClick={() => navigate("/home/AtributoEgreso/nuevo", {
                                                                                         state: [
                                                                                             {
-                                                                                                clave: 'idUsuario',
+                                                                                                clave: 'idPlanEducativo',
                                                                                                 tipo: "number"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'area_especializacion',
+                                                                                                clave: 'identificador',
                                                                                                 tipo: "text"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'grado_escolar',
+                                                                                                clave: 'titulo',
                                                                                                 tipo: "text"
                                                                                             }, 
                                                                                             {
-                                                                                                clave: 'email_profesional',
-                                                                                                tipo: "email"
-                                                                                            }, 
-                                                                                            {
-                                                                                                clave: 'area_cargo',
+                                                                                                clave: 'descripcion',
                                                                                                 tipo: "text"
-                                                                                            }
+                                                                                            }, 
                                                                                         ]
                                                                                     }
                                                                                 )
                                                                             } 
-                    className="button">Crear nuevo director</button>
+                    className="button">Crear nuevo atributo de egreso</button>
             </section>
         </>
     );
 }
 
-export default GestionDirectores;
+export default GestionAtributosEgreso;

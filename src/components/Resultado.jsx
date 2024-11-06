@@ -77,6 +77,8 @@ function Resultado(props) {
                         data-tooltip-place='top'
                         type="button"
                         onClick={() => {
+                            console.log(props.datosVer);
+                            console.log(`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`);
                             onSelect(props.datosVer[`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`]);
                             onSelectString(`${separarMayusculas(modelo)} actual: ${props.datosVer[props.campoTitulo]}`);
                         } }

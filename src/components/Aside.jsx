@@ -8,14 +8,16 @@ function Aside() {
     const opciones = [
         "Gestión de usuarios",
         "Gestión de directores",
+        "Gestión de alumnos",
+        "Gestión de profesores",
         "Gestión de carreras",
         "Gestión de planes educativos",
         "Gestión de atributos de egreso",
         "Gestión de criterios de desempeño",
+        "Gestión de asignaturas",
         "Gestión de indicadores",
         "Gestión de cohortes estudiantiles",
         "Gestión de grupos",
-        "Gestión de asignaturas",
         "Reportes",
     ]
     return (
