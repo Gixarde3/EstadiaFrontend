@@ -19,9 +19,6 @@ function Nuevo() {
 
     const cambiarValor = (key, value) => {
         valores[key] = value;
-        console.log(key);
-        console.log(value);
-        console.log(valores);
         setValores({...valores});
     }
 
@@ -61,9 +58,9 @@ function Nuevo() {
                 showAlert("Error", "No tienes permiso para realizar esta acción", "error");
             }
             else if(error.response.status === 500){
-                showAlert("Error", "Error en el servidor", "error");
+                showAlert("Error", error.response.data.message ?? "Error en el servidor", "error");
             }else{
-                showAlert("Error", "Error desconocido", "error");
+                showAlert("Error", "Ocurrió un error inesperado. Por favor contacta a soporte.", "error");
             }
         }
     }
@@ -92,14 +89,23 @@ function Nuevo() {
                                 <label key={index}>
                                     {
                                         key === 'anio' ?  "Año" : 
-                                                                    key.replace("_", " ").split(' ')
+                                                                    separarMayusculas(key.replace("_", " ").split(' ')
                                                                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                                                    .join(' ')
+                                                                    .join(' '))
                                     }
                                     {
-                                        <div className="input-row">    
+                                        tipos[index] === "file" ?
+                                        (
+                                            <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
+                                                <label className="button" for={key}>Seleccionar archivo</label>
+                                                <input type="file" style={{display:"none"}} onChange={(e) => {cambiarValor(key, e.target.files[0]); }} id={key}/>
+                                                {valores[key] && (<p>Archivo seleccionado: {valores[key].name}</p>)}
+                                            </div>
+                                        )
+                                        :
+                                        (<div className="input-row">    
                                             <input type={tipos[index]} value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
-                                        </div>
+                                        </div>)
                                     }
                                 </label>
                             );

@@ -5,6 +5,8 @@ import BarraBusquedaUsuarios from "./BarraBusquedaUsuarios";
 import BarraBusquedaProfesores from "./BarraBusquedaProfesores";
 import BarraBusquedaAsignaturas from "./BarraBusquedaAsignaturas";
 import BarraBusquedaCohortes from "./BarraBusquedaCohortes";
+import BarraBusquedaGrupo from "./BarraBusquedaGrupo";
+import BarraBusquedaAlumnos from "./BarraBusquedaAlumnos";
 import {useState} from "react";
 import BarraBusquedaAtributosEgreso from "./BarraBusquedaAtributosEgreso";
 function BarraBusquedaSeleccionar(props) {
@@ -65,7 +67,12 @@ function BarraBusquedaSeleccionar(props) {
         }
         else if (modelo === "grupo"){
             return (
-                <BarraBusquedaGrupos onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString}/>
+                <BarraBusquedaGrupo onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString}/>
+            );
+        }
+        else if (modelo === "alumno"){
+            return (
+                <BarraBusquedaAlumnos onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString}/>
             );
         }
         else {

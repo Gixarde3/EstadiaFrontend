@@ -12,7 +12,6 @@ function LayoutGeneral() {
     const navigate = useNavigate();
     useEffect(() => {
         if(user){
-            console.log("Hay usuario", user);
             if(user.privilege === 1){
                 navigate("alumno");
             }
