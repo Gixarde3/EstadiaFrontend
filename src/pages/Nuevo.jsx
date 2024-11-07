@@ -58,7 +58,7 @@ function Nuevo() {
                 showAlert("Error", "No tienes permiso para realizar esta acción", "error");
             }
             else if(error.response.status === 500){
-                showAlert("Error", error.response.data.message ?? "Error en el servidor", "error");
+                showAlert("Error", error.response.data.error ?? "Error en el servidor", "error");
             }else{
                 showAlert("Error", "Ocurrió un error inesperado. Por favor contacta a soporte.", "error");
             }
