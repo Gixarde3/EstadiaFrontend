@@ -18,6 +18,7 @@ function Aside() {
         "Gestión de indicadores",
         "Gestión de cohortes estudiantiles",
         "Gestión de grupos",
+        "Asignar profesores a asignaturas",
         "Mis acciones como profesor",
         "Reportes",
     ]

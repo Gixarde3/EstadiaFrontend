@@ -1,8 +1,9 @@
 import axios from "axios";
 import config from "../config.json";
 import Alert from "./Alert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BarraBusquedaSeleccionar from "./BarraBusquedaSeleccionar";
 function Resultado(props) {
     const modelo = props.modelo;
     const seleccionable = props.seleccionable;
@@ -10,17 +11,34 @@ function Resultado(props) {
     const onSelectString = props.onSelectString;
     const navigate = useNavigate();
     const [alert, setAlert] = useState(null);
+    const [idEliminar, setIdEliminar] = useState(false);
     const closeAlert = () => setAlert(null);
+    const [selectGroupId, setSelectGroupId] = useState(null);
     const showAlert = (title, message, kind, redirectRoute, asking, onAccept) => {
         setAlert({ title, message, kind, isOpen: true, redirectRoute, asking, onAccept });
     }
 
+    useEffect(() => {
+        if(idEliminar) {
+            eliminar(idEliminar);
+        }
+    }, [idEliminar]);
+
     const askEliminar = async (id) => {
-        showAlert("Eliminar", "¿Estás seguro de que deseas eliminar este elemento?", "question", null, true, () => eliminar(id));
+        console.log(modelo);
+        if(modelo === "grupo"){
+            showAlert("Seleccionar grupo de reemplazo", 
+            <>
+                <p>Selecciona el grupo al que se reasignarán los elementos de este grupo</p>
+                <BarraBusquedaSeleccionar modelo="grupo" onSelect={setSelectGroupId}/>
+            </>, "question", null, true, () => showAlert("Eliminar", "¿Estás seguro de que deseas eliminar este elemento?", "question", null, true, () => setIdEliminar(id)));
+        }else{
+            showAlert("Eliminar", "¿Estás seguro de que deseas eliminar este elemento?", "question", null, true, () => setIdEliminar(id));
+        }
     }
     const eliminar = async (id) => {
         try{
-            const response = await axios.delete(`${config.endpoint}/${modelo}/${id}`);
+            const response = await axios.delete(`${config.endpoint}/${modelo}/${id}${selectGroupId ? `/${selectGroupId}` : ''}`);
             showAlert("Eliminado", "Elemento eliminado correctamente", "success");
             props.search();
         }catch(error){
@@ -33,9 +51,15 @@ function Resultado(props) {
                 showAlert("Error", "No tienes permiso para realizar esta acción", "error");
             }
             else if(error.response.status === 500){
-                showAlert("Error", "Error en el servidor", "error");
+                if(error.response.data.error){
+                    showAlert("Error", error.response.data.error, "error");
+                }
+                else{
+                    showAlert("Error", "Error en el servidor", "error");
+                }
             }
         }
+        setIdEliminar(false);
     }
     function separarMayusculas(palabra) {
         return palabra.replace(/([A-Z])/g, ' $1').trim();
