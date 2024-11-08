@@ -24,7 +24,7 @@ function BarraBusquedaCriteriosDesempenio(props) {
         }
     ]
     return (
-        <BarraBusqueda filters={filtros} campoTitulo={"identificador"} modeloBuscar = "criteriodesempenio" onSelect={onSelect} seleccionable={seleccionable} defaultId={defaultId} onSelectString = {onSelectString}/>
+        <BarraBusqueda filters={filtros} campoTitulo={"identificador"} modeloBuscar = "criterioDesempenio" onSelect={onSelect} seleccionable={seleccionable} defaultId={defaultId} onSelectString = {onSelectString}/>
     );
 }
 
