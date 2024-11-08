@@ -28,7 +28,8 @@ function GestionDirectores() {
                                                                                             {
                                                                                                 clave: 'email_profesional',
                                                                                                 tipo: "email",
-                                                                                                obligatorio: true
+                                                                                                obligatorio: true,
+                                                                                                regex: /^[a-zA-Z0-9.]+@upemor.edu.mx$/
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'area_cargo',

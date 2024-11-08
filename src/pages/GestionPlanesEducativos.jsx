@@ -35,7 +35,8 @@ function GestionPlanesEducativos() {
                                                                                                     {
                                                                                                         clave: 'anio',
                                                                                                         tipo: "number",
-                                                                                                        obligatorio: true
+                                                                                                        obligatorio: true,
+                                                                                                        regex: /^(20[2-9][0-9])$/
                                                                                                     }
                                                                                                 ]
                                                                                             })} 

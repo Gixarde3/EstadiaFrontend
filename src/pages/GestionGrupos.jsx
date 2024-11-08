@@ -23,7 +23,8 @@ function GestionGrupos() {
                                                                                             {
                                                                                                 clave: 'letra_inicial',
                                                                                                 tipo: "text",
-                                                                                                obligatorio: true
+                                                                                                obligatorio: true,
+                                                                                                regex: /^[A-Z]$/
                                                                                             }, 
                                                                                         ]
                                                                                     }

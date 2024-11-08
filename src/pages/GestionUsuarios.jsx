@@ -28,7 +28,8 @@ function GestionUsuarios() {
                                                                                                 {
                                                                                                     clave: 'email_personal',
                                                                                                     tipo: "email",
-                                                                                                    obligatorio: true
+                                                                                                    obligatorio: true,
+                                                                                                    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
                                                                                                 },
                                                                                                 {
                                                                                                     clave: 'clave_identificacion',
@@ -43,7 +44,8 @@ function GestionUsuarios() {
                                                                                                 {
                                                                                                     clave: 'privilege',
                                                                                                     tipo: "number",
-                                                                                                    obligatorio: true
+                                                                                                    obligatorio: true,
+                                                                                                    regex: /^[1-3]$/
                                                                                                 }
                                                                                             ]
                                                                                         }

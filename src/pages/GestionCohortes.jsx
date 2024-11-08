@@ -18,12 +18,14 @@ function GestionCohortes() {
                                                                                             {
                                                                                                 clave: 'anio',
                                                                                                 tipo: "number",
-                                                                                                obligatorio: true
+                                                                                                obligatorio: true,
+                                                                                                regex: /^(20[2-9][0-9])$/
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'periodo',
                                                                                                 tipo: "text",
-                                                                                                obligatorio: true
+                                                                                                obligatorio: true,
+                                                                                                regex: /^(O|P|I)$/
                                                                                             }, 
                                                                                         ]
                                                                                     }

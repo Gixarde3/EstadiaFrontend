@@ -33,7 +33,8 @@ function GestionProfesores() {
                                                                                             {
                                                                                                 clave: 'tipo_contrato',
                                                                                                 tipo: "text",
-                                                                                                obligatorio: true
+                                                                                                obligatorio: true,
+                                                                                                regex: /^(Tiempo Completo|Por Asignatura)+$/
                                                                                             },
                                                                                             {
                                                                                                 clave:"elemento_cargo",

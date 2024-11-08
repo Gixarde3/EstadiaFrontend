@@ -28,7 +28,7 @@ function Nuevo() {
 
     useEffect(() => {
         objeto.map(val => {
-            valores[val.clave] = {valor: '', obligatorio: val.obligatorio ?? false};
+            valores[val.clave] = {valor: '', obligatorio: val.obligatorio ?? false, regex: val.regex ?? /^.*$/};
             tipos.push(val.tipo);
         })
         setValores({...valores});
@@ -39,13 +39,22 @@ function Nuevo() {
         try {
             showAlert("Creando", "Creando elemento", "loading");
             const formData = new FormData();
+            let valido = true;
             Object.keys(valores).forEach(key => {
-                if(valores[key].obligatorio && valores[key].valor === ''){
+                console.log(valores[key].obligatorio && valores[key].valor === '' || valores[key].valor === null);
+                if(valores[key].obligatorio && valores[key].valor === '' || valores[key].valor === null){
                     showAlert("Error", "Llena todos los campos obligatorios", "error");
+                    valido = false;
+                    return;
+                }
+                if(valores[key].regex !== null && !valores[key].regex.test(valores[key].valor)){
+                    showAlert("Error", "Llena todos los campos con el formato correcto", "error");
+                    valido = false;
                     return;
                 }
                 formData.append(key, valores[key].valor);
             });
+            if(!valido) return;
             const response = await axios.post(`${config.endpoint}/${modelo}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -53,7 +62,10 @@ function Nuevo() {
             });
             showAlert("Creado", "Elemento creado correctamente", "success", `/home`);
         } catch (error) {
-            console.error(error);
+            if(!error.response){
+                showAlert("Error", "Ocurrió un error inesperado. Por favor contacta a soporte.", "error");
+                return;
+            }
             if(error.response.status === 404){
                 showAlert("Error", "No se encontraron resultados", "error");
             }

@@ -38,7 +38,8 @@ function GestionAsignaturas() {
                                                                                             {
                                                                                                 clave: 'cuatrimestre',
                                                                                                 tipo: "number",
-                                                                                                obligatorio: true
+                                                                                                obligatorio: true,
+                                                                                                regex: /^(1[0-5]|[1-9])$/
                                                                                             },
                                                                                             {
                                                                                                 clave: 'descripcion',
