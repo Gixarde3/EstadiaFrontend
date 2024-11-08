@@ -12,23 +12,28 @@ function GestionDirectores() {
                                                                                         state: [
                                                                                             {
                                                                                                 clave: 'idUsuario',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'area_especializacion',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'grado_escolar',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'email_profesional',
-                                                                                                tipo: "email"
+                                                                                                tipo: "email",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'area_cargo',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }
                                                                                         ]
                                                                                     }

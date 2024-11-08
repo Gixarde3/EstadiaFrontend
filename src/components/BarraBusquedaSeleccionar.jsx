@@ -14,7 +14,6 @@ function BarraBusquedaSeleccionar(props) {
     const onSelect = props.onSelect;
     const defaultId = props.defaultId;
     const [selectedString, setSelectedString] = useState(null);
-    console.log(defaultId);
     const BarraSeleccionada = () => {
         if (modelo === "carrera") {
             return (

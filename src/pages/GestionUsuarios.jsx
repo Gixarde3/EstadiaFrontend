@@ -12,31 +12,38 @@ function GestionUsuarios() {
                                                                                         state: [
                                                                                                 {
                                                                                                     clave: 'nombre',
-                                                                                                    tipo: "text"
+                                                                                                    tipo: "text",
+                                                                                                    obligatorio: true
                                                                                                 }, 
                                                                                                 {
                                                                                                     clave: 'apellido_paterno',
-                                                                                                    tipo: "text"
+                                                                                                    tipo: "text",
+                                                                                                    obligatorio: true
                                                                                                 }, 
                                                                                                 {
                                                                                                     clave: 'apellido_materno',
-                                                                                                    tipo: "text"
+                                                                                                    tipo: "text",
+                                                                                                    obligatorio: true
                                                                                                 }, 
                                                                                                 {
                                                                                                     clave: 'email_personal',
-                                                                                                    tipo: "email"
+                                                                                                    tipo: "email",
+                                                                                                    obligatorio: true
                                                                                                 },
                                                                                                 {
                                                                                                     clave: 'clave_identificacion',
-                                                                                                    tipo: "text"
+                                                                                                    tipo: "text",
+                                                                                                    obligatorio: true
                                                                                                 }, 
                                                                                                 {
                                                                                                     clave: 'password',
-                                                                                                    tipo: "password"
+                                                                                                    tipo: "password",
+                                                                                                    obligatorio: true
                                                                                                 },
                                                                                                 {
                                                                                                     clave: 'privilege',
-                                                                                                    tipo: "number"
+                                                                                                    tipo: "number",
+                                                                                                    obligatorio: true
                                                                                                 }
                                                                                             ]
                                                                                         }

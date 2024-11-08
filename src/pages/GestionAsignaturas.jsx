@@ -12,39 +12,48 @@ function GestionAsignaturas() {
                                                                                         state: [
                                                                                             {
                                                                                                 clave: 'idProfesor',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'codigo',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'nombre',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'area',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'academia',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             },
                                                                                             {
                                                                                                 clave: 'cuatrimestre',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             },
                                                                                             {
                                                                                                 clave: 'descripcion',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             },
                                                                                             {
                                                                                                 clave: 'proposito_aprendizaje',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             },
                                                                                             {
                                                                                                 clave: 'idPlanEducativo',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }
                                                                                         ]
                                                                                     }

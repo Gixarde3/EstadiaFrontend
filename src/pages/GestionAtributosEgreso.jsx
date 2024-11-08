@@ -12,19 +12,23 @@ function GestionAtributosEgreso() {
                                                                                         state: [
                                                                                             {
                                                                                                 clave: 'idPlanEducativo',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'identificador',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'titulo',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'descripcion',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                         ]
                                                                                     }

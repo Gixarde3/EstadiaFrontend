@@ -12,15 +12,18 @@ function GestionCohortes() {
                                                                                         state: [
                                                                                             {
                                                                                                 clave: 'idPlanEducativo',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'anio',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'periodo',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                         ]
                                                                                     }

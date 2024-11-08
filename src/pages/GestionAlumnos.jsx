@@ -12,7 +12,8 @@ function GestionAlumnos() {
                                                                                         state: [
                                                                                             {
                                                                                                 clave: 'idCohorte',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'CrearPorLote',

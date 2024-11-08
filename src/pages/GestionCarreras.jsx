@@ -12,15 +12,18 @@ function GestionCarreras() {
                     state: [
                         {
                             clave: 'idDirector',
-                            tipo: "number"
+                            tipo: "number",
+                            obligatorio: true
                         }, 
                         {
                             clave: 'nombre',
-                            tipo: "text"
+                            tipo: "text",
+                            obligatorio: true
                         }, 
                         {
                             clave: 'abreviatura',
-                            tipo: "text"
+                            tipo: "text",
+                            obligatorio: true
                         }
                     ]})} className="button">Crear nueva carrera</button>
             </section>

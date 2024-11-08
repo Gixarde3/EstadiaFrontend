@@ -418,6 +418,12 @@ search#search{
     }
 }
 
+.aclaracion{
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--azul-opacio);
+}
+
 @media (max-width: 768px){
     body, #root{
         justify-content: center;

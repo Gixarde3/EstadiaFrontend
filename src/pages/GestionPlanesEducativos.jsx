@@ -14,23 +14,28 @@ function GestionPlanesEducativos() {
                                                                                                 [
                                                                                                     {
                                                                                                         clave: 'idCarrera',
-                                                                                                        tipo: "number"
+                                                                                                        tipo: "number",
+                                                                                                        obligatorio: true
                                                                                                     }, 
                                                                                                     {
                                                                                                         clave: 'nombre',
-                                                                                                        tipo: "text"
+                                                                                                        tipo: "text",
+                                                                                                        obligatorio: true
                                                                                                     }, 
                                                                                                     {
                                                                                                         clave: 'abreviatura',
-                                                                                                        tipo: "text"
+                                                                                                        tipo: "text",
+                                                                                                        obligatorio: true
                                                                                                     }, 
                                                                                                     {
                                                                                                         clave: 'clave',
-                                                                                                        tipo: "text"
+                                                                                                        tipo: "text",
+                                                                                                        obligatorio: true
                                                                                                     }, 
                                                                                                     {
                                                                                                         clave: 'anio',
-                                                                                                        tipo: "number"
+                                                                                                        tipo: "number",
+                                                                                                        obligatorio: true
                                                                                                     }
                                                                                                 ]
                                                                                             })} 

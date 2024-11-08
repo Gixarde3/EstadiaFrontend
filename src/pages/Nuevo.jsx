@@ -18,7 +18,7 @@ function Nuevo() {
     }
 
     const cambiarValor = (key, value) => {
-        valores[key] = value;
+        valores[key].valor = value;
         setValores({...valores});
     }
 
@@ -27,9 +27,8 @@ function Nuevo() {
     }
 
     useEffect(() => {
-        console.log(objeto);
         objeto.map(val => {
-            valores[val.clave] = '';
+            valores[val.clave] = {valor: '', obligatorio: val.obligatorio ?? false};
             tipos.push(val.tipo);
         })
         setValores({...valores});
@@ -41,7 +40,11 @@ function Nuevo() {
             showAlert("Creando", "Creando elemento", "loading");
             const formData = new FormData();
             Object.keys(valores).forEach(key => {
-                formData.append(key, valores[key]);
+                if(valores[key].obligatorio && valores[key].valor === ''){
+                    showAlert("Error", "Llena todos los campos obligatorios", "error");
+                    return;
+                }
+                formData.append(key, valores[key].valor);
             });
             const response = await axios.post(`${config.endpoint}/${modelo}`, formData, {
                 headers: {
@@ -80,7 +83,10 @@ function Nuevo() {
                                             key === 'anio' ?  "Año" : 
                                                                         key.replace("_", " ").split(' ')
                                                                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                                                        .join(' '))
+                                                                        .join(' '))                                            
+                                        }
+                                        {
+                                            valores[key].obligatorio && <span style={{color: "red"}}>*</span>
                                         }
                                     </label>
                                     <BarraBusquedaSeleccionar modelo={key.slice(2)} onSelect={(id) => cambiarValor(key, id)}/>
@@ -94,6 +100,9 @@ function Nuevo() {
                                                                     .join(' '))
                                     }
                                     {
+                                        valores[key].obligatorio && <span style={{color: "red"}}>*</span>
+                                    }
+                                    {
                                         tipos[index] === "file" ?
                                         (
                                             <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
@@ -104,15 +113,16 @@ function Nuevo() {
                                         )
                                         :
                                         (<div className="input-row">    
-                                            <input type={tipos[index]} value={valores[key]} onChange={(e) => cambiarValor(key, e.target.value)}/>
+                                            <input type={tipos[index]} value={valores[key].valor} onChange={(e) => cambiarValor(key, e.target.value)}/>
                                         </div>)
                                     }
                                 </label>
                             );
                         })
                     }
-                    <button className="button">Crear {separarMayusculas(modelo)}</button>
+                    <button className="button" style={{marginTop: '1rem'}}>Crear {separarMayusculas(modelo)}</button>
                 </form>
+                <p className="aclaracion">Todos los campos con <span style={{color: "red"}}>*</span> son obligatorios</p>
             </section>
             <Alert 
                 isOpen={alert ? alert.isOpen : false}

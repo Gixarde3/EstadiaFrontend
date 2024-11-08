@@ -12,23 +12,28 @@ function GestionCriteriosDesempenio() {
                                                                                         state: [
                                                                                             {
                                                                                                 clave: 'idAtributoEgreso',
-                                                                                                tipo: "number"
+                                                                                                tipo: "number",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'identificador',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'titulo',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'descripcion',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }, 
                                                                                             {
                                                                                                 clave: 'meta',
-                                                                                                tipo: "text"
+                                                                                                tipo: "text",
+                                                                                                obligatorio: true
                                                                                             }
                                                                                         ]
                                                                                     }
