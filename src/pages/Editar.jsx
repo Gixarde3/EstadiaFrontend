@@ -83,7 +83,7 @@ function Editar() {
                             return (
                                 <label key={index}>
                                     {
-                                        key.substring(0, 2) === "id" ? key.slice(2)
+                                        key.substring(0,2) === "id" && key.charAt(2) == key.charAt(2).toUpperCase()  ? key.slice(2)
                                     
                                         : (
                                             key.replace("_", " ").split(' ')
@@ -92,7 +92,7 @@ function Editar() {
                                         )
                                     }
                                     {
-                                         key.substring(0, 2) === "id" ? 
+                                         key.substring(0,2) === "id" && key.charAt(2) == key.charAt(2).toUpperCase()  ? 
                                             <BarraBusquedaSeleccionar modelo={key.slice(2)} onSelect={(id) => cambiarValor(key, id)} defaultId={valores[key]}/>
                                          : (<div className="input-row">    
                                             <input type={
