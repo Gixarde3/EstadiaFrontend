@@ -4,7 +4,7 @@ function BarraBusquedaGrupoMaterias(props) {
     const onSelectString = props.onSelectString || null;
     const seleccionable = props.seleccionable;
     const defaultId = props.defaultId;
-    console.log(defaultId)
+    
     const filtros = [
         {
             name: "Nombre de la asignatura",

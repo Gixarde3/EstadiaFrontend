@@ -41,7 +41,7 @@ function Nuevo() {
             const formData = new FormData();
             let valido = true;
             Object.keys(valores).forEach(key => {
-                console.log(valores[key].obligatorio && valores[key].valor === '' || valores[key].valor === null);
+                
                 if(valores[key].obligatorio && valores[key].valor === '' || valores[key].valor === null){
                     showAlert("Error", "Llena todos los campos obligatorios", "error");
                     valido = false;

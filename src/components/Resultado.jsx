@@ -25,7 +25,7 @@ function Resultado(props) {
     }, [idEliminar]);
 
     const askEliminar = async (id) => {
-        console.log(modelo);
+        
         if(modelo === "grupo"){
             showAlert("Seleccionar grupo de reemplazo", 
             <>
@@ -43,7 +43,7 @@ function Resultado(props) {
             props.search();
         }catch(error){
             console.error(error);
-            console.log(modelo);
+            
             if(error.response.status === 404){
                 showAlert("Error", "No se encontraron resultados", "error");
             }
@@ -101,8 +101,8 @@ function Resultado(props) {
                         data-tooltip-place='top'
                         type="button"
                         onClick={() => {
-                            console.log(props.datosVer);
-                            console.log(`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`);
+                            
+                            
                             onSelect(props.datosVer[`id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`]);
                             onSelectString(`${separarMayusculas(modelo)} actual: ${props.datosVer[props.campoTitulo]}`);
                         } }

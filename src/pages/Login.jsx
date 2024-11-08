@@ -34,7 +34,7 @@ function Login() {
                 clave_identificacion: identificacion,
                 password
             });
-            console.log(response);
+            
             setUser(response.data);
         } catch (error) {
             console.error(error);
