@@ -29,6 +29,7 @@ import GestionAsignaturas from "./pages/GestionAsignaturas";
 import GestionCohortes from "./pages/GestionCohortes";
 import GestionGrupos from "./pages/GestionGrupos";
 import GestionAlumnos from "./pages/GestionAlumnos";
+import GestionGrupoMaterias from "./pages/GestionGrupoMaterias";
 function App() {
   axios.defaults.withCredentials = true;
   return (
@@ -55,6 +56,7 @@ function App() {
               <Route path="cohortes-estudiantiles" element={<GestionCohortes/>}/>
               <Route path="grupos" element={<GestionGrupos/>}/>
               <Route path="alumnos" element={<GestionAlumnos/>}/>
+              <Route path="a-asignaturas" element={<GestionGrupoMaterias/>}/>
               <Route path=":modelo/editar/:id" element={<Editar/>}/>
               <Route path=":modelo/nuevo" element={<Nuevo/>}/>
             </Route>

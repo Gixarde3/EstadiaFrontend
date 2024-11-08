@@ -74,6 +74,11 @@ function BarraBusquedaSeleccionar(props) {
                 <BarraBusquedaAlumnos onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString}/>
             );
         }
+        else if (modelo === "grupoMateria"){
+            return (
+                <BarraBusquedaGrupoMaterias onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString}/>
+            );
+        }
         else {
             return (
                 <h1>Modelo no encontrado</h1>

@@ -59,7 +59,7 @@ function Aside() {
                                 return <Link to={link} key={index} onClick={() => setIsOpen(!isOpen)}>{opcion}</Link>
                             })
                         }
-                        <button onClick={() => setUser(null)}>Cerrar sesión</button>
+                        <button onClick={() => setUser(null)} style={{cursor: "pointer"}}>Cerrar sesión</button>
                         </>
                     )
             }

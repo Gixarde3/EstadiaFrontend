@@ -11,11 +11,6 @@ function GestionAsignaturas() {
                 <button id="agregar" onClick={() => navigate("/home/Asignatura/nuevo", {
                                                                                         state: [
                                                                                             {
-                                                                                                clave: 'idProfesor',
-                                                                                                tipo: "number",
-                                                                                                obligatorio: true
-                                                                                            }, 
-                                                                                            {
                                                                                                 clave: 'codigo',
                                                                                                 tipo: "text",
                                                                                                 obligatorio: true

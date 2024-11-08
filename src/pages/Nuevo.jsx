@@ -118,9 +118,9 @@ function Nuevo() {
                                         tipos[index] === "file" ?
                                         (
                                             <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
-                                                <label className="button" for={key}>Seleccionar archivo</label>
+                                                <label className="button" htmlFor={key}>Seleccionar archivo</label>
                                                 <input type="file" style={{display:"none"}} onChange={(e) => {cambiarValor(key, e.target.files[0]); }} id={key}/>
-                                                {valores[key] && (<p>Archivo seleccionado: {valores[key].name}</p>)}
+                                                {valores[key] && (<p>Archivo seleccionado: {valores[key].valor.name}</p>)}
                                             </div>
                                         )
                                         :
