@@ -3,14 +3,14 @@ import config from "../config.json";
 import Alert from "../components/Alert";
 import "../assets/css/login.css";
 import { useLocation, useParams } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import BarraBusquedaSeleccionar from "../components/BarraBusquedaSeleccionar";
 function Nuevo() {
     const location = useLocation();
-    const objeto = location.state || {};
+    const objeto = location.state.campos ? location.state.campos : location.state;
+    const idAdicional = location.state.idAdicional ?? null
     const {modelo} = useParams();
     const [valores, setValores] = useState({});
-    const [tipos, setTipos] = useState([]);
     const [alert, setAlert] = useState(null);
     const closeAlert = () => setAlert(null);
     const showAlert = (title, message, kind, redirectRoute, asking, onAccept) => {
@@ -28,8 +28,7 @@ function Nuevo() {
 
     useEffect(() => {
         objeto.map(val => {
-            valores[val.clave] = {valor: '', obligatorio: val.obligatorio ?? false, regex: val.regex ?? /^.*$/};
-            tipos.push(val.tipo);
+            valores[val.clave] = {valor: '', obligatorio: val.obligatorio ?? false, regex: val.regex ?? /^.*$/, tipo: val.tipo ?? 'text'};
         })
         setValores({...valores});
     }, []);
@@ -54,6 +53,7 @@ function Nuevo() {
                 }
                 formData.append(key, valores[key].valor);
             });
+            idAdicional && formData.append('idGrupoMateria', idAdicional);
             if(!valido) return;
             const response = await axios.post(`${config.endpoint}/${modelo}`, formData, {
                 headers: {
@@ -88,8 +88,8 @@ function Nuevo() {
                         Object.keys(valores).map((key, index) => {
                             return (
                                 key.substring(0,2) === "id" && key.charAt(2) == key.charAt(2).toUpperCase() ? 
-                                <> 
-                                    <label key={index} style={{marginBottom: 0}}>
+                                <Fragment key={index}> 
+                                    <label  style={{marginBottom: 0}}>
                                         {
                                             key.substring(0, 2) === "id" ? separarMayusculas(key.slice(2)) : (
                                             key === 'anio' ?  "Año" : 
@@ -102,7 +102,7 @@ function Nuevo() {
                                         }
                                     </label>
                                     <BarraBusquedaSeleccionar modelo={key.slice(2)} onSelect={(id) => cambiarValor(key, id)}/>
-                                </>
+                                </Fragment>
                                 :
                                 <label key={index}>
                                     {
@@ -115,17 +115,17 @@ function Nuevo() {
                                         valores[key].obligatorio && <span style={{color: "red"}}>*</span>
                                     }
                                     {
-                                        tipos[index] === "file" ?
+                                        valores[key].tipo === "file" ?
                                         (
                                             <div style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
                                                 <label className="button" htmlFor={key}>Seleccionar archivo</label>
                                                 <input type="file" style={{display:"none"}} onChange={(e) => {cambiarValor(key, e.target.files[0]); }} id={key}/>
-                                                {valores[key] && (<p>Archivo seleccionado: {valores[key].valor.name}</p>)}
+                                                {valores[key].valor && (<p>Archivo seleccionado: {valores[key].valor.name}</p>)}
                                             </div>
                                         )
                                         :
                                         (<div className="input-row">    
-                                            <input type={tipos[index]} value={valores[key].valor} onChange={(e) => cambiarValor(key, e.target.value)}/>
+                                            <input type={valores[key].tipo} value={valores[key].valor} onChange={(e) => cambiarValor(key, e.target.value)}/>
                                         </div>)
                                     }
                                 </label>

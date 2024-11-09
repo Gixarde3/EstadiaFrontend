@@ -23,7 +23,7 @@ function Aside() {
         "Reportes",
     ]
     return (
-    <aside className={isOpen && "active"}>
+    <aside className={isOpen ? "active" : ""}>
         <div className="anti-shadow-div">
             <h2>
                 <Link to={"/home/" + user.privilege === 1 ? "alumno" : user.privilege === 2 ? "profesor" : "director"}>

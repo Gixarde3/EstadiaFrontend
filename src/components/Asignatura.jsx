@@ -13,7 +13,7 @@ function Asignatura({idGrupoMateria, nombre, nombreProfesor, cuatrimestre, letra
         const getEvidenciasProximas = async () => {
             try{
                 const response = await axios.get(`${config.endpoint}/grupomateria/${idGrupoMateria}/proximas-entregas`);
-                
+                console.log(response.data);
                 setEvidenciasProximas(response.data);
             }catch(error){
                 console.error(error);
@@ -41,9 +41,6 @@ function Asignatura({idGrupoMateria, nombre, nombreProfesor, cuatrimestre, letra
                                                                                                                                                                                                                         year: 'numeric',
                                                                                                                                                                                                                         month: '2-digit',
                                                                                                                                                                                                                         day: '2-digit',
-                                                                                                                                                                                                                        hour: '2-digit',
-                                                                                                                                                                                                                        minute: '2-digit',
-                                                                                                                                                                                                                        hour12: false
                                                                                                                                                                                                                     }
                                                                                                                                                                                                                 )
                                                                                                                                                                                                             }</Link></li>)}

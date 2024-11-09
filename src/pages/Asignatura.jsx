@@ -1,14 +1,18 @@
-import { useLocation, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useLocation, useParams, useNavigate} from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 import axios from "axios";
 import config from "../config.json";
 import Tarea from '../components/Tarea';
 function Asignatura() {
     const [evidencias, setEvidencias] = useState([]);
     const { idGrupoMateria } = useParams();
+    const {user} = useContext(UserContext);
+    console.log(user);
     const location = useLocation();
     const objeto = location.state || {};
     const [color, setColor] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getEvidencias = async () => {
@@ -39,6 +43,77 @@ function Asignatura() {
                 <h2>Profesor: {objeto.nombreProfesor}</h2>
             </div>
             <h3 className='titulo'>Evidencias</h3>
+            
+            {
+                user.privilege >= 2 && <button className='tarea' style = {{cursor: 'pointer'}} onClick={() => navigate("/home/evidencia/nuevo", 
+                    {
+                        state: {
+                            campos: [
+                                {
+                                    clave: 'nombre',
+                                    tipo: "text",
+                                    obligatorio: true
+                                }, 
+                                {
+                                    clave: 'descripcion',
+                                    tipo: "text",
+                                    obligatorio: true
+                                }, 
+                                {
+                                    clave: 'idAtributoEgreso',
+                                    tipo: "text",
+                                }, 
+                                {
+                                    clave: 'idAtributoEgreso',
+                                    tipo: "text",
+                                },
+                                {
+                                    clave: 'idIndicador',
+                                    tipo: "text",
+                                }, 
+                                {
+                                    clave: 'archivoDescripcion',
+                                    tipo: "file",
+                                }, 
+                                {
+                                    clave: 'idIndicador',
+                                    tipo: "text",
+                                }, 
+                                {
+                                    clave: 'objetivo',
+                                    tipo: "text",
+                                    obligatorio: true
+                                }, 
+                                {
+                                    clave: 'momento',
+                                    tipo: "text",
+                                    obligatorio: true
+                                }, 
+                                {
+                                    clave: 'tipo',
+                                    tipo: "text",
+                                    regex: /^(Producto|Desempeño|Conocimiento|Formativa)$/,
+                                    obligatorio: true
+                                }, 
+                                {
+                                    clave: 'fechaLimite',
+                                    tipo: "date",
+                                }
+                            ],
+                            idAdicional: idGrupoMateria
+                        }
+                    }
+                )}>
+
+                <div className="info">
+                    <div className={`icono color-${color}`}>
+                        <img src="/img/add.png" alt="Ícono de agregar" />
+                    </div>
+                    <h3>Crear nueva tarea</h3>
+                </div>
+                </button>
+
+            }
             <div className="tareas">
                 {
                     evidencias.map((evidencia, index) => {
