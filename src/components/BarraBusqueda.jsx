@@ -27,7 +27,6 @@ function BarraBusqueda(props) {
             return;
         }
         try{
-            showAlert("Buscando", "Buscando resultados", "loading");
             const formData = new FormData();
             formData.append(filtro, busqueda);
             const response = await axios.post(`${config.endpoint}/${modeloBuscar.toLowerCase()}s/findAll`, formData, {
@@ -64,7 +63,6 @@ function BarraBusqueda(props) {
         if(defaultId){
             const getDefault = async () => {
                 try {
-                    showAlert("Buscando", "Buscando resultados", "loading");
                     const response = await axios.get(`${config.endpoint}/${modeloBuscar.toLowerCase()}/${defaultId}`);
                     setResultados([response.data]);
                     closeAlert();

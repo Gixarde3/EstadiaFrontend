@@ -32,19 +32,21 @@ import GestionAlumnos from "./pages/GestionAlumnos";
 import GestionGrupoMaterias from "./pages/GestionGrupoMaterias";
 import Materias from "./pages/Materias";
 import Asignatura from "./pages/Asignatura";
+import { MateriasContextProvider } from "./contexts/MateriasContext";
+import Evidencia from "./pages/Evidencia";
 function App() {
   axios.defaults.withCredentials = true;
   return (
     <UserContextProvider>
-      <BrowserRouter>
-        <Routes>
-          
+      <MateriasContextProvider>
+        <BrowserRouter>
+          <Routes>
             <Route path="/" element={<Login/>}/>
             <Route path="/solicitar_token" element={<SolicitarToken/>}/>
             <Route path="/cambiar-contrasena/:token" element={<CambiarContrasenia/>}/>
             <Route path="/home" element={<LayoutGeneral />}>
-              <Route path="alumno" element={<h1>Alumno</h1>} />
-              <Route path="profesor" element={<h1>Profesor</h1>} />
+              <Route path="alumno" element={<Materias/>} />
+              <Route path="profesor" element={<Materias/>} />
               <Route path="director" element={<PrincipalDirector/>}/>
               <Route path="usuarios" element={<GestionUsuarios/>}/>
               <Route path="carreras" element={<GestionCarreras/>}/>
@@ -61,12 +63,14 @@ function App() {
               <Route path="a-asignaturas" element={<GestionGrupoMaterias/>}/>
               <Route path="como-profesor" element={<Materias/>}/>
               <Route path="asignatura/:idGrupoMateria" element={<Asignatura/>}/>
+              <Route path="evidencia/:idEvidencia" element={<Evidencia/>}/>
               <Route path=":modelo/editar/:id" element={<Editar/>}/>
               <Route path=":modelo/nuevo" element={<Nuevo/>}/>
             </Route>
-        </Routes>
+          </Routes>
         </BrowserRouter>
-      </UserContextProvider>
+      </MateriasContextProvider>
+    </UserContextProvider>
   )
 }
 

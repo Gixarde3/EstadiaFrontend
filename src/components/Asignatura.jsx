@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "../config.json";
-function Asignatura({idGrupoMateria, nombre, nombreProfesor, cuatrimestre, letra}) {
+function Asignatura({idGrupoMateria, nombre, nombreProfesor, cuatrimestre, letra, isOption = false}) {
     const [color, setColor] = useState(0);
     const [evidenciasProximas, setEvidenciasProximas] = useState([]);
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ function Asignatura({idGrupoMateria, nombre, nombreProfesor, cuatrimestre, letra
         getEvidenciasProximas();
     }, []);
     return (
-        <button className={`asignatura color-${color}`} onClick={() => navigate(`/home/asignatura/${idGrupoMateria}`, {
+        <button className={`asignatura color-${color} ${isOption ? "option": ""}`} onClick={() => navigate(`/home/asignatura/${idGrupoMateria}`, {
                                                                                         state:{
                                                                                             nombre,
                                                                                             nombreProfesor,
@@ -33,6 +33,7 @@ function Asignatura({idGrupoMateria, nombre, nombreProfesor, cuatrimestre, letra
             <div className="nombre-materia">
                 <h2 className="titulo-materia">{nombre} - {cuatrimestre}° {letra} - {nombreProfesor}</h2>
             </div>
+            {!isOption &&
             <div className="evidencias-proximas">
                 <img src="/img/tarea.png" alt="Próximas tarea"/>
                 {evidenciasProximas.length <= 0 && <p>No hay evidencias próximas a entregar. ¡Felicidades!</p>}
@@ -45,7 +46,7 @@ function Asignatura({idGrupoMateria, nombre, nombreProfesor, cuatrimestre, letra
                                                                                                                                                                                                                 )
                                                                                                                                                                                                             }</Link></li>)}
                 </ul>
-            </div>
+            </div>}
         </button>
     );
 }

@@ -2,9 +2,12 @@ import { UserContext } from "../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { OptionsContext } from "../contexts/OptionsContext";
+import { MateriasContext } from "../contexts/MateriasContext";
+import Asignatura from "./Asignatura";
 function Aside() {
     const { user, setUser } = useContext(UserContext);
     const { isOpen, setIsOpen } = useContext(OptionsContext);
+    const { materias, setMaterias } = useContext(MateriasContext);
     const opciones = [
         "Gestión de usuarios",
         "Gestión de directores",
@@ -37,7 +40,16 @@ function Aside() {
         <section id="nav-options">
             {
                 user.privilege <= 2 ?
-                    <p>Pronto disponible</p> :
+                   materias.map((materia, index) => {
+                        return <Asignatura key={index}
+                            idGrupoMateria={materia.idGrupoMateria}
+                            nombre={materia.nombre}
+                            nombreProfesor={materia.nombreProfesor}
+                            cuatrimestre={materia.cuatrimestre}
+                            letra={materia.letra}
+                            isOption={true}
+                        />
+                   }):
                     (
                         <>
                         {
@@ -59,10 +71,11 @@ function Aside() {
                                 return <Link to={link} key={index} onClick={() => setIsOpen(!isOpen)}>{opcion}</Link>
                             })
                         }
-                        <button onClick={() => setUser(null)} style={{cursor: "pointer"}}>Cerrar sesión</button>
+                        
                         </>
                     )
             }
+            <button onClick={() => setUser(null)} style={{cursor: "pointer"}}>Cerrar sesión</button>
         </section>
     </aside>);
 }

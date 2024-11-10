@@ -5,10 +5,12 @@ import axios from "axios";
 import config from "../config.json";
 import { UserContext } from "../contexts/UserContext";
 import Alert from "../components/Alert";
+import { MateriasContext } from "../contexts/MateriasContext";
 function Materias() {
     const navigate = useNavigate();
     const [asignaturas, setAsignaturas] = useState([]);
     const { user } = useContext(UserContext);
+    const {setMaterias} = useContext(MateriasContext);
     const [alert, setAlert] = useState(null);
     const closeAlert = () => setAlert(null);
     const showAlert = (title, message, kind, redirectRoute, asking, onAccept) => {
@@ -24,6 +26,7 @@ function Materias() {
                 const response = await axios.get(`${config.endpoint}/asignaturas/findbyusuario/${user.idUsuario}`);
                 
                 setAsignaturas(response.data);
+                setMaterias(response.data);
             }catch(error){
                 if(!error.response){
                     showAlert("Error", "Ocurrió un error inesperado. Por favor contacta a soporte.", "error");

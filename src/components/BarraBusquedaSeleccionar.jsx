@@ -8,6 +8,8 @@ import BarraBusquedaCohortes from "./BarraBusquedaCohortes";
 import BarraBusquedaGrupo from "./BarraBusquedaGrupo";
 import BarraBusquedaAlumnos from "./BarraBusquedaAlumnos";
 import BarraBusquedaIndicadores from "./BarraBusquedaIndicadores";
+import BarraBusquedaCriteriosDesempenio from "./BarraBusquedaCriteriosDesempenio";
+import BarraBusquedaGrupoMaterias from "./BarraBusquedaGrupoMaterias";
 import {useState} from "react";
 import BarraBusquedaAtributosEgreso from "./BarraBusquedaAtributosEgreso";
 function BarraBusquedaSeleccionar(props) {

@@ -13,27 +13,26 @@ function Asignatura() {
     const objeto = location.state || {};
     const [color, setColor] = useState(0);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const getEvidencias = async () => {
-            try{
-                setColor(Math.floor(Math.random() * 8) + 1);
-                const formData = new FormData();
-                formData.append('idGrupoMateria', idGrupoMateria);
-                const response = await axios.post(`${config.endpoint}/evidencias/findAll`,
-                    formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
+    const getEvidencias = async () => {
+        try{
+            setColor(Math.floor(Math.random() * 8) + 1);
+            const formData = new FormData();
+            formData.append('idGrupoMateria', idGrupoMateria);
+            const response = await axios.post(`${config.endpoint}/evidencias/findAll`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
                     }
-                );
-                
-                setEvidencias(response.data);
-            }catch(error){
-                console.error(error);
-            }
+                }
+            );
+            
+            setEvidencias(response.data);
+        }catch(error){
+            console.error(error);
         }
+    }
+    useEffect(() => {
         getEvidencias();
     }, []);
     return (
@@ -123,6 +122,7 @@ function Asignatura() {
                             idEvidencia={evidencia.idEvidencia}
                             nombre={evidencia.nombre}
                             fechaLimite={evidencia.fechaLimite}
+                            getEvidencias={getEvidencias}
                         />
                     )})
                 }
