@@ -7,24 +7,29 @@ import { Outlet } from 'react-router-dom';
 import Aside from '../components/Aside';
 import { Tooltip } from 'react-tooltip';
 import { OptionsContextProvider } from '../contexts/OptionsContext';
+import { useLocation } from 'react-router-dom';
+
 function LayoutGeneral() {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
+    const location = useLocation();
     useEffect(() => {
         if(user){
-            if(user.privilege === 1){
-                navigate("alumno");
-            }
-            if(user.privilege === 2){
-                navigate("profesor");
-            }
-            if(user.privilege === 3){
-                navigate("director");
+            if(location.pathname === "/home"){
+                if(user.privilege === 1){
+                    navigate("alumno");
+                }
+                if(user.privilege === 2){
+                    navigate("profesor");
+                }
+                if(user.privilege === 3){
+                    navigate("director");
+                }
             }
         }else{
             navigate("/");
         }
-    }, [user]);
+    });
     return (
         <>
         {

@@ -5,12 +5,23 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import config from "../config.json";
 import "../assets/css/evidencia.css";
+import Alert from "../components/Alert";
 function Evidencia() {
     const [evidencia, setEvidencia] = useState({});
     const [evidenciasEntregadas, setEvidenciasEntregadas] = useState([]);
+    const [evidenciaEntregada, setEvidenciaEntregada] = useState(false);
     const { idEvidencia } = useParams();
     const { user } = useContext(UserContext);
     const [archivos, setArchivos] = useState([]);
+    const [archivosYaEntregados, setArchivosYaEntregados] = useState([]);
+    const [alert, setAlert] = useState({message: "", type: ""});
+    const closeAlert = () => {
+        setAlert(null)
+    }
+    const showAlert = (title, message, kind, redirectRoute, asking, onAccept) => {
+        setAlert({ title, message, kind, isOpen: true, redirectRoute, asking, onAccept });
+    }
+
     useEffect(() => {
         const getEvidencia = async () => {
             try {
@@ -33,8 +44,35 @@ function Evidencia() {
                 console.error(error);
             }
         }
+
+        const getArchivosEvidencia = async () => {
+            try {
+                const alumno = await axios.post(`${config.endpoint}/alumno/find`,{
+                    idUsuario: user.idUsuario
+                });
+                if (!alumno.data.idAlumno) {
+                    return;
+                }
+                const evidenciaEntregada = await axios.post(`${config.endpoint}/evidenciaentregadas/findAll`, {
+                    idEvidencia,
+                    idAlumno: alumno.data.idAlumno
+                });
+                if (evidenciaEntregada.data.length === 0) {
+                    return;
+                }
+                setEvidenciaEntregada(evidenciaEntregada.data[0]);
+                const archivos = await axios.post(`${config.endpoint}/archivoevidenciaentregadas/findall`, {
+                    idEvidenciaEntregada: evidenciaEntregada.data[0].idEvidenciaEntregada
+                });
+                setArchivosYaEntregados(archivos.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
         if(user.privilege >= 2){
             getEvidenciasEntregadas();
+        }else{
+            getArchivosEvidencia();
         }
     }, []);
 
@@ -52,13 +90,63 @@ function Evidencia() {
         archivos.splice(index, 1);
         setArchivos([...archivos]);
     }
+
+    const eliminarArchivoEntregado = (index) => {
+        archivosYaEntregados.splice(index, 1);
+        setArchivosYaEntregados([...archivosYaEntregados]);
+    }
+
+    const entregarEvidencia = async () => {
+        try {
+            const alumno = await axios.post(`${config.endpoint}/alumno/find`,{
+                idUsuario: user.idUsuario
+            });
+            if (!alumno.data.idAlumno) {
+                return;
+            }
+            const formData = new FormData();
+            formData.append("idEvidencia", idEvidencia);
+            formData.append("idAlumno", alumno.data.idAlumno);
+            archivos.forEach(archivo => {
+                formData.append("archivos", archivo);
+            });
+            archivosYaEntregados.forEach(archivo => {
+                formData.append("archivosYaEntregados", archivo.nombre_original);
+            });
+            const response = await axios.post(`${config.endpoint}/evidenciaentregada`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            console.log(response.data);
+            showAlert("Evidencia entregada", "Evidencia entregada correctamente", "success", "/home");
+        } catch (error) {
+            console.error(error);
+            if(!error.response){
+                showAlert("Error", "Ocurrió un error inesperado. Por favor contacta a soporte.", "error");
+                return;
+            }
+            if(error.response.status === 404){
+                showAlert("Error", "No se encontraron resultados", "error");
+            }
+            else if(error.response.status === 401){
+                showAlert("Error", "No tienes permiso para realizar esta acción", "error");
+            }
+            else if(error.response.status === 500){
+                showAlert("Error", error.response.data.error ?? "Error en el servidor", "error");
+                if(error.response.data.error){
+                    console.log(error.response.data.error);
+                }
+            }
+        }
+    }
     return (
     <div id="evidencia">
         <section id="titulo-evidencia">
             <h1>{evidencia.nombre}</h1>
             <div id="info-entrega">
                 <p>Entrega: {new Date(evidencia.fechaLimite).toLocaleDateString()}</p>
-                <p>10/100</p>
+                {evidenciaEntregada && evidenciaEntregada.calificacion && <p>{evidenciaEntregada.calificacion/100}</p>}
             </div>
         </section>
         <div id="info-evidencia">
@@ -86,12 +174,22 @@ function Evidencia() {
                                         <button type="button" onClick={() => eliminarArchivo(index)}><img src="/img/close.png" alt="Botón de eliminar archivo" /></button> 
                                     </div>)
                                 })}
+                                {archivosYaEntregados.length > 0 && archivosYaEntregados.map((archivo, index) => {
+                                    return (
+                                    <div className="info-archivo" key={archivo.nombre_original}>
+                                        <p className="nombre-archivo">{archivo.nombre_original}</p>
+                                        <div className="botones">
+                                            <a href={`${config.endpoint}/descripciones/${archivo.archivo}`} download><img src="/img/download.svg" alt="Descargar documento" /></a>
+                                            <button type="button" onClick={() => eliminarArchivoEntregado(index)}><img src="/img/close.png" alt="Botón de eliminar archivo" /></button> 
+                                        </div>
+                                    </div>)
+                                })}
                                 
                                 <label htmlFor="evidencia-entregada" className="button" style={{textAlign:"center"}}>
                                     Cargar archivo
                                     <input type="file" id="evidencia-entregada" style={{display:'none'}} onChange={handleLoadFile}/>
                                 </label>
-                                {archivos.length > 0 && <button className="button">Entregar evidencia</button>}
+                                <button className="button" onClick={entregarEvidencia}>{evidenciaEntregada ? "Volver a entregar evidencia" : "Entregar evidencia"}</button>
                             </>
                     )
                     :
@@ -119,6 +217,16 @@ function Evidencia() {
                 <div id="comentarios"></div>
                 </aside>
         </div>
+        <Alert 
+            isOpen={alert ? alert.isOpen : false}
+            title={alert ? alert.title : ''}
+            message={alert ? alert.message : ''}
+            kind={alert ? alert.kind : ''}
+            closeAlert={closeAlert}
+            redirectRoute={alert ? alert.redirectRoute : ''}
+            asking={alert ? alert.asking : false}
+            onAccept={alert ? alert.onAccept : () => {}}
+        />
     </div>);
 }
 
