@@ -23,7 +23,7 @@ function Aside() {
         "Gestión de grupos",
         "Asignar profesores a asignaturas",
         "Mis acciones como profesor",
-        "Reportes",
+        "Acciones especiales",
     ]
     return (
     <aside className={isOpen ? "active" : ""}>

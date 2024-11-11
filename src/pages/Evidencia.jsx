@@ -201,9 +201,10 @@ function Evidencia() {
                 <section id="descripcion-evidencia">
                     <p>{evidencia.descripcion}</p>
                 </section>
+                {evidencia.archivoDescripcion &&
                 <section id="archivo-evidencia">
                     <a className="button" href={`${config.endpoint}/descripciones/${evidencia.archivoDescripcion}`} download>Descripción de evidencia</a>
-                </section>
+                </section>}
                 <section id="criterios">
                     <h2>Criterios de evaluación</h2>
                     {user.privilege >= 2 && <button type="button" className="button" onClick={() => navigate("/home/CriterioEvaluacion/nuevo", {

@@ -115,7 +115,7 @@ function CriterioEvaluacion({criterio, getCriterios, calificando = false, addCal
                 calificando && 
                 <div className="operation-buttons" style={{right: '-210px'}}>
                     <input type="number" max={100} value={evaluacion?.puntaje} onChange = {(e) => setEvalaucion(e.target.value)} placeholder="Calificación del 0 al 100" style={{width:'105px'}}/>
-                    <button type="button" className="button" style={{width: 'auto'}} onClick={() => addCalificacion(criterio.idCriterioEvaluacion, evaluacion)}>{"Evaluar"}</button>
+                    <button type="button" className="button" style={{width: 'auto', display:'flex', alignItems:'center'}} onClick={() => addCalificacion(criterio.idCriterioEvaluacion, evaluacion)}>{"Evaluar"}</button>
                 </div>
             }
             <Alert 

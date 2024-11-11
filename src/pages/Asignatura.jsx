@@ -4,6 +4,7 @@ import { UserContext } from '../contexts/UserContext';
 import axios from "axios";
 import config from "../config.json";
 import Tarea from '../components/Tarea';
+import { Link } from 'react-router-dom';
 function Asignatura() {
     const [evidencias, setEvidencias] = useState([]);
     const { idGrupoMateria } = useParams();
@@ -104,15 +105,23 @@ function Asignatura() {
                     }
                 )}>
 
+                    <div className="info">
+                        <div className={`icono color-${color}`}>
+                            <img src="/img/add.png" alt="Ícono de agregar" />
+                        </div>
+                        <h3>Crear nueva tarea</h3>
+                    </div>
+                </button>
+            }
+
+            <Link className="tarea" style={{marginTop: '1rem'}} to={`/home/evidencia/generar/${idGrupoMateria}`}>
                 <div className="info">
                     <div className={`icono color-${color}`}>
-                        <img src="/img/add.png" alt="Ícono de agregar" />
+                        <img src="/img/stars.svg" alt="Ícono de agregar" />
                     </div>
-                    <h3>Crear nueva tarea</h3>
+                    <h3>Generar sugerencia de evidencia con IA</h3>
                 </div>
-                </button>
-
-            }
+            </Link>
             <div className="tareas">
                 {
                     evidencias.map((evidencia, index) => {
