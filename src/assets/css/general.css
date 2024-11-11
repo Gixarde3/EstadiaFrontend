@@ -206,7 +206,7 @@ label{
     font-weight: bold;
     margin: 10px 0;
     width: 100%;
-    & select, textarea{
+    & select, textarea, input{
         width: 100%;
         padding: 10px;
         border: 1px solid #000;

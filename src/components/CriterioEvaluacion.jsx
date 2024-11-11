@@ -73,7 +73,7 @@ function CriterioEvaluacion({criterio, getCriterios, calificando = false, addCal
         getEvaluaciones();
     }, []);
     return (
-        <div className="criterio-evaluacion">
+        <div className="criterio-evaluacion" style={{maxWidth: "400px"}}>
             <button className = {`abrir ${open ? "open" : ""}`} type="button" onClick={() => isOpen(!open)}>
                 <h3>{criterio.titulo}</h3>
                 <img src="/img/close.png" alt="Icono desplegar descipción" />

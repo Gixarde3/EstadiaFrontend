@@ -12,6 +12,7 @@ function GenerarEvidencia() {
     const [tipoEvidencia, setTipoEvidencia] = useState("Producto");
     const [objetivo, setObjetivo] = useState(null);
     const [alert, setAlert] = useState(null);
+    const [porcentajeFinal, setPorcentajeFinal] = useState(0);
     const closeAlert = () => setAlert(null);
     const showAlert = (title, message, kind, redirectRoute, asking, onAccept) => {
         setAlert({ title, message, kind, isOpen: true, redirectRoute, asking, onAccept });
@@ -22,12 +23,22 @@ function GenerarEvidencia() {
         try{
             console.log(tipoEvidencia);
             showAlert("Generando", "Generando evidencia", "loading");
+            console.log({
+                idGrupoMateria,
+                idAtributoEgreso: atributoEgreso,
+                idCriterioDesempenio: criterioDesempenio,
+                idIndicador: indicador,
+                tipoEvidencia,
+                porcentajeFinal,
+                objetivo
+            })
             const response = await axios.post(`${config.endpoint}/evidencia/generar`, {
                 idGrupoMateria,
                 idAtributoEgreso: atributoEgreso.idAtributoEgreso,
                 idCriterioDesempenio: criterioDesempenio.idCriterioDesempenio,
                 idIndicador: indicador.idIndicador,
                 tipoEvidencia,
+                porcentajeFinal,
                 objetivo
             });
             showAlert("Evidencia generada", "Evidencia generada correctamente, para verla, presiona \"aceptar\"", "success", "/home/evidencia/" + response.data.idEvidencia);
@@ -81,6 +92,10 @@ function GenerarEvidencia() {
                 <label>
                     Objetivo <span style={{color:'red'}}>*</span>
                     <textarea style={{resize: 'vertical'}} onChange={(e) => setObjetivo(e.target.value)}></textarea>
+                </label>
+                <label>
+                    ¿Cuánto porcentaje aporta a la calficación final de la asignatura? <span style={{color:'red'}}>*</span>
+                    <input type="number" min="0" max="100" onChange={(e) => setPorcentajeFinal(e.target.value)}/>
                 </label>
                 <button className="button">Generar evidencia</button>
             </form>

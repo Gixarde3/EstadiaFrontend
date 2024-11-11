@@ -114,14 +114,14 @@ function Asignatura() {
                 </button>
             }
 
-            <Link className="tarea" style={{marginTop: '1rem'}} to={`/home/evidencia/generar/${idGrupoMateria}`}>
+            {user.privilege >= 2 && <Link className="tarea" style={{marginTop: '1rem'}} to={`/home/evidencia/generar/${idGrupoMateria}`}>
                 <div className="info">
                     <div className={`icono color-${color}`}>
                         <img src="/img/stars.svg" alt="Ícono de agregar" />
                     </div>
                     <h3>Generar sugerencia de evidencia con IA</h3>
                 </div>
-            </Link>
+            </Link>}
             <div className="tareas">
                 {
                     evidencias.map((evidencia, index) => {
