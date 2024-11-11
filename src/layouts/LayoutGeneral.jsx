@@ -8,7 +8,7 @@ import Aside from '../components/Aside';
 import { Tooltip } from 'react-tooltip';
 import { OptionsContextProvider } from '../contexts/OptionsContext';
 import { useLocation } from 'react-router-dom';
-
+import { ToastContainer } from 'react-toastify';
 function LayoutGeneral() {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();

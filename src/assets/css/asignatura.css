@@ -160,13 +160,16 @@
         position: absolute;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         gap: 0.5rem;
         padding: 0.1rem;
         top: 2px;
         right: -70px;
 
+        & input[type="number"]{
+            border: 1px solid #000;
+        }
         & button{
             height: 25px;
             width: 25px;
@@ -192,6 +195,8 @@
             &.seleccionar{
                 background: var(--verde);
             }
+
+            
         }
     }
 }

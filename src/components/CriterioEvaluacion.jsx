@@ -5,13 +5,13 @@ import Alert from "./Alert";
 import axios from "axios";
 import config from "../config.json";
 import "../assets/css/criterioevaluacion.css";
-function CriterioEvaluacion({criterio, getCriterios}) {
+function CriterioEvaluacion({criterio, getCriterios, calificando = false, addCalificacion, idAlumnoEnviado}) {
     const navigate = useNavigate();
-    console.log(criterio);
     const { user } = useContext(UserContext);
     const [alert, setAlert] = useState(null);
     const closeAlert = () => setAlert(null);
     const [open, isOpen] = useState(false);
+    const [evaluacion, setEvalaucion] = useState(null);
     const showAlert = (title, message, kind, redirectRoute, asking, onAccept) => {
         setAlert({ title, message, kind, isOpen: true, redirectRoute, asking, onAccept });
     }
@@ -42,6 +42,36 @@ function CriterioEvaluacion({criterio, getCriterios}) {
             }
         }
     }
+
+    useEffect(() => {
+        const getEvaluaciones = async () => {
+            try{
+                let alumno = null;
+                if(!idAlumnoEnviado){
+                    alumno = await axios.post(`${config.endpoint}/alumno/find`, {
+                        idUsuario: user.idUsuario
+                    });
+                }
+                console.log("alumno", alumno);
+                const response = await axios.post(`${config.endpoint}/criterioevaluacionpuntajes/find`,
+                    {
+                        idCriterioEvaluacion: criterio.idCriterioEvaluacion,
+                        idAlumno: idAlumnoEnviado ? idAlumnoEnviado : alumno.data.idAlumno
+                    }
+                );
+                console.log("peticion", `${config.endpoint}/criterioevaluacionpuntajes/find`,
+                    {
+                        idCriterioEvaluacion: criterio.idCriterioEvaluacion,
+                        idAlumno: idAlumnoEnviado ? idAlumnoEnviado : alumno.data.idAlumno
+                    }, idAlumnoEnviado);
+                console.log("evaluacion", response.data);
+                setEvalaucion(response.data);
+            }catch(error){
+                console.error(error);
+            }
+        }                
+        getEvaluaciones();
+    }, []);
     return (
         <div className="criterio-evaluacion">
             <button className = {`abrir ${open ? "open" : ""}`} type="button" onClick={() => isOpen(!open)}>
@@ -50,10 +80,15 @@ function CriterioEvaluacion({criterio, getCriterios}) {
             </button>
             <div className="descripcion-criterio">
                 <p>{criterio.descripcion}</p>
+                {(user.privilege === 1) && (
+                    <div className="calificacion">
+                        <p>Calificación: {evaluacion ? evaluacion.calificacion : 'No calificado'}</p>
+                    </div>
+                )}
                 <p className="porcentaje">{criterio.porcentaje_al_final}%</p>
             </div>
             {
-                user.privilege >= 2 &&
+                user.privilege >= 2 && !calificando &&
                 <div className="operation-buttons">
                     <button className="opcion editar"
                         data-tooltip-id='tooltip'
@@ -74,6 +109,13 @@ function CriterioEvaluacion({criterio, getCriterios}) {
                         <img src="/img/close.png" alt="Botón de eliminar" />
                     </button>
 
+                </div>
+            }
+            {
+                calificando && 
+                <div className="operation-buttons" style={{right: '-210px'}}>
+                    <input type="number" max={100} value={evaluacion?.puntaje} onChange = {(e) => setEvalaucion(e.target.value)} placeholder="Calificación del 0 al 100" style={{width:'105px'}}/>
+                    <button type="button" className="button" style={{width: 'auto'}} onClick={() => addCalificacion(criterio.idCriterioEvaluacion, evaluacion)}>{"Evaluar"}</button>
                 </div>
             }
             <Alert 

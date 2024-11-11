@@ -12,6 +12,7 @@ function Evidencia() {
     const [evidenciasEntregadas, setEvidenciasEntregadas] = useState([]);
     const [evidenciaEntregada, setEvidenciaEntregada] = useState(false);
     const [criterios, setCriterios] = useState([]);
+    const [calificacion, setCalificacion] = useState(0);
     const { idEvidencia } = useParams();
     const { user } = useContext(UserContext);
     const [archivos, setArchivos] = useState([]);
@@ -91,6 +92,37 @@ function Evidencia() {
         getCriterios();
     }, []);
 
+    const addCalificacion = (cal) => {
+        setCalificacion(calificacion + cal);
+        console.log(calificacion);
+    }
+
+    useEffect(() => {
+        const getCalificaciones = async () => {
+            if(user.privilege === 1){
+                setCalificacion(0);
+                let calificacionLocal = 0;
+                const alumno = await axios.post(`${config.endpoint}/alumno/find`, {
+                    idUsuario: user.idUsuario
+                });
+                for(const criterio of criterios){
+                    const response = await axios.post(`${config.endpoint}/criterioevaluacionpuntajes/find`,
+                        {
+                            idCriterioEvaluacion: criterio.idCriterioEvaluacion,
+                            idAlumno: alumno.data.idAlumno
+                        }
+                    );
+                    if(response.data.puntaje){
+                        calificacionLocal +=  response.data.puntaje * criterio.porcentaje_al_final / 100;
+                        console.log(response.data.puntaje * criterio.porcentaje_al_final / 100)
+                    }
+                }
+                console.log(calificacionLocal);
+                setCalificacion(calificacionLocal);
+            }
+        }
+        getCalificaciones();
+    }, [criterios]);
     const handleLoadFile = (e) => {
         const file = e.target.files[0];
         if(file.size > 5242880){
@@ -161,7 +193,7 @@ function Evidencia() {
             <h1>{evidencia.nombre}</h1>
             <div id="info-entrega">
                 <p>Entrega: {new Date(evidencia.fechaLimite).toLocaleDateString()}</p>
-                {evidenciaEntregada && evidenciaEntregada.calificacion && <p>{evidenciaEntregada.calificacion/100}</p>}
+                {user.privilege === 1 && <p>{calificacion}/100</p>}
             </div>
         </section>
         <div id="info-evidencia">
@@ -174,7 +206,7 @@ function Evidencia() {
                 </section>
                 <section id="criterios">
                     <h2>Criterios de evaluación</h2>
-                    <button type="button" className="button" onClick={() => navigate("/home/CriterioEvaluacion/nuevo", {
+                    {user.privilege >= 2 && <button type="button" className="button" onClick={() => navigate("/home/CriterioEvaluacion/nuevo", {
                                                                                         state: {
                                                                                                 campos: [
                                                                                                 {
@@ -197,11 +229,11 @@ function Evidencia() {
                                                                                         }
                                                                                     }
                                                                                 )
-                                                                            } >Crear criterio de evaluación</button>
+                                                                            } >Crear criterio de evaluación</button>}
                     {criterios.length === 0 && <p>No hay criterios de evaluación</p>}
                     {criterios.map(criterio => {
                         return (
-                            <CriterioEvaluacion criterio={criterio} key={criterio.idCriterio} getCriterios={getCriterios} />
+                            <CriterioEvaluacion criterio={criterio} key={criterio.idCriterio} getCriterios={getCriterios}/>
                         );
                     })}
                 </section>
