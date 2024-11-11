@@ -1,0 +1,56 @@
+.criterio-evaluacion{
+    width: 100%;
+    position: relative;
+
+    & .descripcion-criterio{
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s;
+        padding: 0;
+    }
+
+    & button.abrir{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--morado);
+        padding: 0.5rem;
+        color: white;
+        font-weight: bold;
+        height: 2rem;
+        cursor: pointer;
+        & img{
+            transform: rotate(-45deg);
+            filter: invert(1);
+            max-width: 100%;
+            height: 100%;
+            transition: transform 0.3s; 
+        }
+    }
+
+    & button.abrir.open{
+        & img{
+            transform: rotate(0deg);
+        }
+        & + .descripcion-criterio{
+            max-height: 100%;
+            padding: 0.5rem;
+
+        }
+    }
+
+    & .descripcion-criterio{
+        box-sizing: border-box;
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        & p{
+            margin: 0;
+        }
+        & .porcentaje{
+            text-align: right;
+        }
+    }
+}

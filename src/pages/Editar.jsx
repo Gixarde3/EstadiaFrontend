@@ -146,6 +146,7 @@ function Editar() {
     }, []);
 
     const formatFieldName = useCallback((key) => {
+        key = key.replace("_", " ");
         if (key.substring(0, 2) === "id" && key.charAt(2) === key.charAt(2).toUpperCase()) {
             return separarMayusculas(key.slice(2));
         }
@@ -216,7 +217,7 @@ function Editar() {
     };
 
     const shouldRenderField = useCallback((key) => {
-        const excludedFields = ['password', `id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`, 'idGrupoMateria'];
+        const excludedFields = ['password', `id${modelo.charAt(0).toUpperCase() + modelo.slice(1)}`, 'idGrupoMateria', 'idEvidencia'];
         return !excludedFields.includes(key);
     }, [modelo]);
 

@@ -9,6 +9,7 @@ function Nuevo() {
     const location = useLocation();
     const objeto = location.state.campos ? location.state.campos : location.state;
     const idAdicional = location.state.idAdicional ?? null
+    const idEvidencia = location.state.idEvidencia ?? null
     const {modelo} = useParams();
     const [valores, setValores] = useState({});
     const [alert, setAlert] = useState(null);
@@ -54,6 +55,7 @@ function Nuevo() {
                 formData.append(key, valores[key].valor);
             });
             idAdicional && formData.append('idGrupoMateria', idAdicional);
+            idEvidencia && formData.append('idEvidencia', idEvidencia);
             if(!valido) return;
             const response = await axios.post(`${config.endpoint}/${modelo}`, formData, {
                 headers: {

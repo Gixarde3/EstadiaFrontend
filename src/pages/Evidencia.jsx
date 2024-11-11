@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import {Link} from "react-router-dom";
@@ -6,20 +6,34 @@ import axios from "axios";
 import config from "../config.json";
 import "../assets/css/evidencia.css";
 import Alert from "../components/Alert";
+import CriterioEvaluacion from "../components/CriterioEvaluacion";
 function Evidencia() {
     const [evidencia, setEvidencia] = useState({});
     const [evidenciasEntregadas, setEvidenciasEntregadas] = useState([]);
     const [evidenciaEntregada, setEvidenciaEntregada] = useState(false);
+    const [criterios, setCriterios] = useState([]);
     const { idEvidencia } = useParams();
     const { user } = useContext(UserContext);
     const [archivos, setArchivos] = useState([]);
     const [archivosYaEntregados, setArchivosYaEntregados] = useState([]);
     const [alert, setAlert] = useState({message: "", type: ""});
+    const navigate = useNavigate();
     const closeAlert = () => {
         setAlert(null)
     }
     const showAlert = (title, message, kind, redirectRoute, asking, onAccept) => {
         setAlert({ title, message, kind, isOpen: true, redirectRoute, asking, onAccept });
+    }
+
+    const getCriterios = async () => {
+        try {
+            const response = await axios.post(`${config.endpoint}/criterioevaluacions/findall`, {
+                idEvidencia
+            });
+            setCriterios(response.data);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     useEffect(() => {
@@ -74,6 +88,7 @@ function Evidencia() {
         }else{
             getArchivosEvidencia();
         }
+        getCriterios();
     }, []);
 
     const handleLoadFile = (e) => {
@@ -159,6 +174,36 @@ function Evidencia() {
                 </section>
                 <section id="criterios">
                     <h2>Criterios de evaluación</h2>
+                    <button type="button" className="button" onClick={() => navigate("/home/CriterioEvaluacion/nuevo", {
+                                                                                        state: {
+                                                                                                campos: [
+                                                                                                {
+                                                                                                    clave: 'titulo',
+                                                                                                    tipo: "text",
+                                                                                                    obligatorio: true
+                                                                                                }, 
+                                                                                                {
+                                                                                                    clave: 'descripcion',
+                                                                                                    tipo: "text",
+                                                                                                    obligatorio: true,
+                                                                                                },  
+                                                                                                {
+                                                                                                    clave: 'porcentaje_al_final',
+                                                                                                    tipo: "number",
+                                                                                                    obligatorio: true,
+                                                                                                }, 
+                                                                                            ],
+                                                                                            idEvidencia: idEvidencia
+                                                                                        }
+                                                                                    }
+                                                                                )
+                                                                            } >Crear criterio de evaluación</button>
+                    {criterios.length === 0 && <p>No hay criterios de evaluación</p>}
+                    {criterios.map(criterio => {
+                        return (
+                            <CriterioEvaluacion criterio={criterio} key={criterio.idCriterio} getCriterios={getCriterios} />
+                        );
+                    })}
                 </section>
             </div>
             <aside id="entrega-evidencia">

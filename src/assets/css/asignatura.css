@@ -155,6 +155,47 @@
     }
 }
 
+.criterio-evaluacion{
+    & .operation-buttons{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.1rem;
+        top: 2px;
+        right: -70px;
+
+        & button{
+            height: 25px;
+            width: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 0.3rem;
+            & img{
+                width: 100%;
+                height: auto;
+                border: none;
+                border-radius: 0;
+                filter: invert(1);
+            }
+
+            &.editar{
+                background: var(--azul);
+            }
+
+            &.eliminar{
+                background: var(--rojo);
+            }
+
+            &.seleccionar{
+                background: var(--verde);
+            }
+        }
+    }
+}
+
 #header-materia{
     width: 100%;
     display: flex;
