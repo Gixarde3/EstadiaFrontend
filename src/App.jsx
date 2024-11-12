@@ -36,6 +36,7 @@ import { MateriasContextProvider } from "./contexts/MateriasContext";
 import Evidencia from "./pages/Evidencia";
 import EvidenciaEntregada from "./pages/EvidenciaEntregada";
 import GenerarEvidencia from "./pages/GenerarEvidencia";
+import ActividadesEspeciales from "./pages/ActividadesEspeciales";
 function App() {
   axios.defaults.withCredentials = true;
   return (
@@ -66,6 +67,7 @@ function App() {
               <Route path="como-profesor" element={<Materias/>}/>
               <Route path="asignatura/:idGrupoMateria" element={<Asignatura/>}/>
               <Route path="entrega/:idEvidenciaEntregada" element={<EvidenciaEntregada/>}/>
+              <Route path="especiales" element={<ActividadesEspeciales/>}/>
               <Route path=":modelo/editar/:id" element={<Editar/>}/>
               <Route path=":modelo/nuevo" element={<Nuevo/>}/>
               <Route path="evidencia/generar/:idGrupoMateria" element={<GenerarEvidencia/>}/>
