@@ -10,12 +10,15 @@ import BarraBusquedaAlumnos from "./BarraBusquedaAlumnos";
 import BarraBusquedaIndicadores from "./BarraBusquedaIndicadores";
 import BarraBusquedaCriteriosDesempenio from "./BarraBusquedaCriteriosDesempenio";
 import BarraBusquedaGrupoMaterias from "./BarraBusquedaGrupoMaterias";
+import BarraBusquedaEvidencias from "./BarraBusquedaEvidencia";
+import BarraBusquedaAlumnosAsignaturas from "./BarraBusquedaAlumnoAsignatura";
 import {useState} from "react";
 import BarraBusquedaAtributosEgreso from "./BarraBusquedaAtributosEgreso";
 function BarraBusquedaSeleccionar(props) {
     const modelo = props.modelo.charAt(0).toLowerCase() + props.modelo.slice(1);
     const onSelect = props.onSelect;
     const defaultId = props.defaultId;
+    const idGrupo = props.idGrupo;
     const [selectedString, setSelectedString] = useState(null);
     const BarraSeleccionada = () => {
         if (modelo === "carrera") {
@@ -74,7 +77,7 @@ function BarraBusquedaSeleccionar(props) {
         }
         else if (modelo === "alumno"){
             return (
-                <BarraBusquedaAlumnos onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString}/>
+                <BarraBusquedaAlumnos onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString} idGrupo = {idGrupo}/>
             );
         }
         else if (modelo === "grupoMateria"){
@@ -82,6 +85,16 @@ function BarraBusquedaSeleccionar(props) {
                 <BarraBusquedaGrupoMaterias onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString}/>
             );
         }
+        else if (modelo === "evidencia"){
+            return (
+                <BarraBusquedaEvidencias onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString} idGrupo = {idGrupo}/>
+            );
+        }else if (modelo === "alumnoAsignatura"){
+            return (
+                <BarraBusquedaAlumnosAsignaturas onSelect={onSelect} seleccionable={true} defaultId={defaultId} onSelectString = {setSelectedString} idGrupo = {idGrupo}/>
+            );
+        }
+
         else {
             return (
                 <h1>Modelo no encontrado</h1>

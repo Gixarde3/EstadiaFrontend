@@ -4,6 +4,8 @@ function BarraBusquedaAlumnos(props) {
     const onSelectString = props.onSelectString || null;
     const seleccionable = props.seleccionable;
     const defaultId = props.defaultId;
+    const idGrupo = props.idGrupo;
+
     
     const filtros = [
         {
@@ -12,7 +14,7 @@ function BarraBusquedaAlumnos(props) {
         },
     ]
     return (
-        <BarraBusqueda filters={filtros} campoTitulo={"clave_identificacion"} modeloBuscar = "alumno" onSelect={onSelect} seleccionable={seleccionable} defaultId={defaultId} onSelectString = {onSelectString}/>
+        <BarraBusqueda filters={filtros} campoTitulo={"clave_identificacion"} modeloBuscar = "alumno" onSelect={onSelect} seleccionable={seleccionable} defaultId={defaultId} onSelectString = {onSelectString} idGrupo={idGrupo}/>
     );
 }
 

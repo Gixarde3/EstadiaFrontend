@@ -11,6 +11,7 @@ function BarraBusqueda(props) {
     const seleccionable = props.seleccionable ?? false;
     const defaultId = props.defaultId ?? null;
     const onSelectString = props.onSelectString ?? null;
+    const idGrupo = props.idGrupo ?? null;
     const [mostrarFiltros, setMostrarFiltros] = useState(false);
     const [filtro, setFiltro] = useState("");
     const [busqueda, setBusqueda] = useState("");
@@ -29,6 +30,7 @@ function BarraBusqueda(props) {
         try{
             const formData = new FormData();
             formData.append(filtro, busqueda);
+            idGrupo && formData.append('idGrupoMateria', idGrupo);
             const response = await axios.post(`${config.endpoint}/${modeloBuscar.toLowerCase()}s/findAll`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'

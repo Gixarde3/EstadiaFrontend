@@ -92,6 +92,8 @@
     border-radius: 5px;
     cursor: pointer;
     position: relative;
+    background-color: white;
+    z-index: 1;
     & .info{
         display: flex;
         align-items: center;

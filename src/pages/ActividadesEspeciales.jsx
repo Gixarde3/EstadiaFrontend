@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Alert from "../components/Alert";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { Link } from "react-router-dom";
 function ActividadesEspeciales() {
     const [archivoRespaldo, setArchivoRespaldo] = useState(null);
     const [alert, setAlert] = useState(null);
@@ -43,6 +44,10 @@ function ActividadesEspeciales() {
             </label>
             {archivoRespaldo && <button type="button" className="button" onClick={cargarRespaldo}>Cargar respaldo</button>}
         </form>}
+        <Link to="/home/grafica-evidencias" className="button">Gráfica comparativa entre resultados de evidencias entre grupos</Link>
+        <Link to="/home/grafica-alumnos" className="button">Gráfica comparativa entre alumnos</Link>
+        {user.privilege === 3 && <Link to="/home/grafica-cohortes" className="button">Gráfica comparativa en el cumplimiento de atributos de egreso entre cohortes</Link>}
+        <Link to="/home/grafica-no-entrega" className="button">Gráfica de comparación de porcentajes de no entrega</Link>
         <Alert 
             title={alert?.title} 
             message={alert?.message} 

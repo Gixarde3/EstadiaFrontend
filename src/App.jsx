@@ -37,6 +37,10 @@ import Evidencia from "./pages/Evidencia";
 import EvidenciaEntregada from "./pages/EvidenciaEntregada";
 import GenerarEvidencia from "./pages/GenerarEvidencia";
 import ActividadesEspeciales from "./pages/ActividadesEspeciales";
+import GraficaEvidencias from "./pages/GraficaEvidencias";
+import GraficaAlumnos from "./pages/GraficaAlumnos";
+import GraficaCumplimientoCohortes from "./pages/GraficaCumplimientoCohortes";
+import GraficaPorcentajesNoEntrega from "./pages/GraficaPorcentajesNoEntrega";
 function App() {
   axios.defaults.withCredentials = true;
   return (
@@ -67,6 +71,10 @@ function App() {
               <Route path="como-profesor" element={<Materias/>}/>
               <Route path="asignatura/:idGrupoMateria" element={<Asignatura/>}/>
               <Route path="entrega/:idEvidenciaEntregada" element={<EvidenciaEntregada/>}/>
+              <Route path="grafica-evidencias" element={<GraficaEvidencias/>}/>
+              <Route path="grafica-alumnos" element={<GraficaAlumnos/>}/>
+              <Route path="grafica-cohortes" element={<GraficaCumplimientoCohortes/>}/>
+              <Route path="grafica-no-entrega" element={<GraficaPorcentajesNoEntrega/>}/>
               <Route path="especiales" element={<ActividadesEspeciales/>}/>
               <Route path=":modelo/editar/:id" element={<Editar/>}/>
               <Route path=":modelo/nuevo" element={<Nuevo/>}/>
