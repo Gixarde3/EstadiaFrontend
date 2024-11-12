@@ -80,11 +80,20 @@ function CriterioEvaluacion({criterio, getCriterios, calificando = false, addCal
             </button>
             <div className="descripcion-criterio">
                 <p>{criterio.descripcion}</p>
-                {(user.privilege === 1) && (
+                {(user.privilege === 1) ? (
                     <div className="calificacion">
-                        <p>Calificación: {evaluacion ? evaluacion.calificacion : 'No calificado'}</p>
+                        <p>Calificación: {evaluacion ? `${evaluacion.puntaje}/100` : 'No calificado'}</p>
                     </div>
-                )}
+                ) : 
+                (
+                    calificando && 
+                    <div className="calificacion">
+                        <input type="number" max={100} value={evaluacion?.puntaje} onChange = {(e) => setEvalaucion(e.target.value)} placeholder="Calificación del 0 al 100" style={{width:'105px', backgroundColor:'white'}}/>
+                        / 100
+                        <button type="button" className="button" style={{width: 'auto', display:'flex', alignItems:'center'}} onClick={() => addCalificacion(criterio.idCriterioEvaluacion, evaluacion)}>{"Evaluar"}</button>
+                    </div>
+                )
+                }
                 <p className="porcentaje">{criterio.porcentaje_al_final}%</p>
             </div>
             {
@@ -109,13 +118,6 @@ function CriterioEvaluacion({criterio, getCriterios, calificando = false, addCal
                         <img src="/img/close.png" alt="Botón de eliminar" />
                     </button>
 
-                </div>
-            }
-            {
-                calificando && 
-                <div className="operation-buttons" style={{right: '-210px'}}>
-                    <input type="number" max={100} value={evaluacion?.puntaje} onChange = {(e) => setEvalaucion(e.target.value)} placeholder="Calificación del 0 al 100" style={{width:'105px'}}/>
-                    <button type="button" className="button" style={{width: 'auto', display:'flex', alignItems:'center'}} onClick={() => addCalificacion(criterio.idCriterioEvaluacion, evaluacion)}>{"Evaluar"}</button>
                 </div>
             }
             <Alert 

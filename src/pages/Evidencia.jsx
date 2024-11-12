@@ -7,6 +7,7 @@ import config from "../config.json";
 import "../assets/css/evidencia.css";
 import Alert from "../components/Alert";
 import CriterioEvaluacion from "../components/CriterioEvaluacion";
+import Markdown from 'react-markdown'
 function Evidencia() {
     const [evidencia, setEvidencia] = useState({});
     const [evidenciasEntregadas, setEvidenciasEntregadas] = useState([]);
@@ -18,6 +19,7 @@ function Evidencia() {
     const [archivos, setArchivos] = useState([]);
     const [archivosYaEntregados, setArchivosYaEntregados] = useState([]);
     const [alert, setAlert] = useState({message: "", type: ""});
+    const [retroalimentacion, setRetroalimentacion] = useState("");
     const navigate = useNavigate();
     const closeAlert = () => {
         setAlert(null)
@@ -80,6 +82,10 @@ function Evidencia() {
                     idEvidenciaEntregada: evidenciaEntregada.data[0].idEvidenciaEntregada
                 });
                 setArchivosYaEntregados(archivos.data);
+                const retroalimentacion = await axios.post(`${config.endpoint}/retroalimentacionevidenciaentregada/find`, {
+                    idEvidenciaEntregada: evidenciaEntregada.data[0].idEvidenciaEntregada,
+                });
+                setRetroalimentacion(retroalimentacion.data);
             } catch (error) {
                 console.error(error);
             }
@@ -199,7 +205,7 @@ function Evidencia() {
         <div id="info-evidencia">
             <div id="datos-evidencia">
                 <section id="descripcion-evidencia">
-                    <p>{evidencia.descripcion}</p>
+                    <Markdown>{evidencia.descripcion}</Markdown>
                 </section>
                 {evidencia.archivoDescripcion &&
                 <section id="archivo-evidencia">
@@ -292,7 +298,13 @@ function Evidencia() {
                 }
                 </div>
                     
-                <div id="comentarios"></div>
+                <div id="comentarios">
+                    <h2>Retroalimentación</h2>
+                    {
+                        retroalimentacion &&
+                        <Markdown>{retroalimentacion.retroalimentacion}</Markdown>
+                    }
+                </div>
                 </aside>
         </div>
         <Alert 

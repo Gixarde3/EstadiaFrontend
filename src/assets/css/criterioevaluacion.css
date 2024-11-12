@@ -52,5 +52,30 @@
         & .porcentaje{
             text-align: right;
         }
+        & div.calificacion{
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            align-items: center;
+            & p{
+                margin: 0;
+            }
+            & .button{
+                cursor: pointer;
+                padding: 0;
+                border-radius: 5px;
+                padding-inline: 0.2rem;
+                color: white;
+                font-weight: bold;
+            }
+        }
+        & input{
+            width: 100%;
+            border: 1px solid #000;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: white;
+            text-align: right;
+        }
     }
 }
