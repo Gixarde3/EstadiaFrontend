@@ -69,7 +69,6 @@ function App() {
               <Route path="alumnos" element={<GestionAlumnos/>}/>
               <Route path="a-asignaturas" element={<GestionGrupoMaterias/>}/>
               <Route path="como-profesor" element={<Materias/>}/>
-              <Route path="asignatura/:idGrupoMateria" element={<Asignatura/>}/>
               <Route path="entrega/:idEvidenciaEntregada" element={<EvidenciaEntregada/>}/>
               <Route path="grafica-evidencias" element={<GraficaEvidencias/>}/>
               <Route path="grafica-alumnos" element={<GraficaAlumnos/>}/>
@@ -78,6 +77,7 @@ function App() {
               <Route path="especiales" element={<ActividadesEspeciales/>}/>
               <Route path=":modelo/editar/:id" element={<Editar/>}/>
               <Route path=":modelo/nuevo" element={<Nuevo/>}/>
+              <Route path="asignatura/:idGrupoMateria" element={<Asignatura/>}/>
               <Route path="evidencia/generar/:idGrupoMateria" element={<GenerarEvidencia/>}/>
               <Route path="evidencia/:idEvidencia" element={<Evidencia/>}/>
 
