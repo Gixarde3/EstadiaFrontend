@@ -39,8 +39,11 @@ function Aside() {
         </div>
         <section id="nav-options">
             {
+                user.privilege === 2 && <Link to="/home/especiales">Acciones especiales</Link>
+            }
+            {
                 user.privilege <= 2 ?
-                   materias.map((materia, index) => {
+                    materias.map((materia, index) => {
                         return <Asignatura key={index}
                             idGrupoMateria={materia.idGrupoMateria}
                             nombre={materia.nombre}
