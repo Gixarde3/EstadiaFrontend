@@ -65,7 +65,7 @@ function GraficaAlumnos() {
             <h1>Gráfica comparativa entre resultados de alumnos entre grupos</h1>
             <form className="login">
                 <label>
-                    Escribe la cantidad de grupos a comparar
+                    Escribe la cantidad de alumnos a comparar
                     <input type="number" value={cantidadGrupos} onChange={(e) => {
                         setCantidadGrupos(parseInt('0' + e.target.value));
                     }}/>

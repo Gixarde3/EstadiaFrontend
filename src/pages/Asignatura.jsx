@@ -77,12 +77,15 @@ function Asignatura() {
     }
     return (
         <div className='contenedor'>
-            <button type="button" className="button" style={{
-                position: 'fixed',
-                bottom: '1rem',
-                right: '1rem',
-                zIndex: 2
-            }} onClick={generarRetroalimentacion}>Generar retroalimentación</button>
+            {
+                user.privilege === 1 &&
+                <button type="button" className="button" style={{
+                    position: 'fixed',
+                    bottom: '1rem',
+                    right: '1rem',
+                    zIndex: 2
+                }} onClick={generarRetroalimentacion}>Generar retroalimentación</button>
+            }
             <div id={`header-materia`} className={`color-${color}`}>
                 <h1>{objeto.nombre}</h1>
                 <h2>Profesor: {objeto.nombreProfesor}</h2>
