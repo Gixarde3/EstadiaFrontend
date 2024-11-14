@@ -41,6 +41,7 @@ import GraficaEvidencias from "./pages/GraficaEvidencias";
 import GraficaAlumnos from "./pages/GraficaAlumnos";
 import GraficaCumplimientoCohortes from "./pages/GraficaCumplimientoCohortes";
 import GraficaPorcentajesNoEntrega from "./pages/GraficaPorcentajesNoEntrega";
+import Notificaciones from "./pages/Notificaciones";
 function App() {
   axios.defaults.withCredentials = true;
   return (
@@ -80,7 +81,7 @@ function App() {
               <Route path="asignatura/:idGrupoMateria" element={<Asignatura/>}/>
               <Route path="evidencia/generar/:idGrupoMateria" element={<GenerarEvidencia/>}/>
               <Route path="evidencia/:idEvidencia" element={<Evidencia/>}/>
-
+              <Route path="notificaciones" element={<Notificaciones/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

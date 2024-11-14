@@ -38,6 +38,7 @@ function Aside() {
             </h2>    
         </div>
         <section id="nav-options">
+            <Link to="/home/notificaciones">Tus notificaciones</Link>
             {
                 user.privilege === 2 && <Link to="/home/especiales">Acciones especiales</Link>
             }
